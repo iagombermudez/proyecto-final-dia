@@ -1,33 +1,31 @@
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
+using BusquedasUI.Core.Base;
+using BusquedasUI.Core.Xml;
 
-namespace BusquedasUI.Core
+namespace BusquedasUI.Core.Search
 {
-    public static class ReservasClientes
+    public static class ReservasHabitacion
     {
         public static List<Reserva> GetReservas()
         {
             ReservaXmlReader xmlReader = new ReservaXmlReader();
             List<Reserva> reservasClientes = xmlReader.GetReservas();
 
-            reservasClientes = reservasClientes.OrderBy(x => x.Cliente).ToList();
+            reservasClientes = reservasClientes.OrderBy(x => x.getNumHabitacion()).ToList();
             
             return reservasClientes;
         }
         
         public static List<Reserva> GetReservasPerYear(int year)
         {
-            ReservaXmlReader xmlReader = new ReservaXmlReader();
-            List<Reserva> reservasClientes = xmlReader.GetReservas();
+            List<Reserva> reservasClientes = GetReservas();
 
             //filtrar reservas por año
             //la forma de hacerlo no esta "bien"
             //cambiar para el proyecto final
             reservasClientes = reservasClientes.
-                Where(x => x.FechaEntrada.Substring(x.FechaEntrada.Length - 4) == year.ToString()).
-                OrderBy(x => x.Cliente)
+                Where(x => x.FechaEntrada.Substring(x.FechaEntrada.Length - 4) == year.ToString())
                 .ToList();
             
             return reservasClientes;

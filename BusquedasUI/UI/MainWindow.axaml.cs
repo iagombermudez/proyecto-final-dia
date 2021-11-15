@@ -15,11 +15,13 @@ namespace BusquedasUI.UI
             var reservasPendientesBtn = this.FindControl<Button>("ReservasPendientesBtn");
             var disponibilidadBtn = this.FindControl<Button>("DisponibilidadBtn");
             var reservasClientesBtn = this.FindControl<Button>("ReservasClientesBtn");
+            var reservasHabitacionesBtn = this.FindControl<Button>("ReservasHabitacionesBtn");
             var ocupacionBtn = this.FindControl<Button>("OcupacionBtn");
 
             reservasPendientesBtn.Click += (_, _) => this.OnReservasPendientesClick();
             disponibilidadBtn.Click += (_, _) => this.OnDisponibilidadClick();
             reservasClientesBtn.Click += (_, _) => this.OnReservasClientesClick();
+            reservasHabitacionesBtn.Click += (_, _) => this.OnReservasHabitacionesClick();
             ocupacionBtn.Click += (_, _) => this.OnOcupacionClick();
         }
 
@@ -36,6 +38,11 @@ namespace BusquedasUI.UI
         private void OnReservasClientesClick()
         {
             new ReservasClientesWindow().Show();
+        }
+        
+        private void OnReservasHabitacionesClick()
+        {
+            new ReservasHabitacionWindow().Show();
         }
 
         private void OnDisponibilidadClick()

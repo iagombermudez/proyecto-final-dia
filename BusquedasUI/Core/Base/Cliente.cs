@@ -1,4 +1,4 @@
-namespace BusquedasUI.Core
+namespace BusquedasUI.Core.Base
 {
     public class Cliente
     {

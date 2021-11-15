@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.CodeAnalysis;
+using BusquedasUI.Core.Base;
+using BusquedasUI.Core.Xml;
 
-namespace BusquedasUI.Core
+namespace BusquedasUI.Core.Search
 {
     public class HabitacionesOcupadas
     {

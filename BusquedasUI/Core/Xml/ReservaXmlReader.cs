@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Xml.Linq;
+using BusquedasUI.Core.Base;
 
-namespace BusquedasUI.Core
+namespace BusquedasUI.Core.Xml
 {
     public class ReservaXmlReader:XmlReader
     {

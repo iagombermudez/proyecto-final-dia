@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using BusquedasUI.Core.Base;
+using BusquedasUI.Core.Xml;
 
-namespace BusquedasUI.Core
+namespace BusquedasUI.Core.Search
 {
     public static class ReservasPendientes
     {

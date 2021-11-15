@@ -4,6 +4,8 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using BusquedasUI.Core;
+using BusquedasUI.Core.Base;
+using BusquedasUI.Core.Search;
 
 namespace BusquedasUI.UI
 {

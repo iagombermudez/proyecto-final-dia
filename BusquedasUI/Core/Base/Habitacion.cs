@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BusquedasUI.Core
+namespace BusquedasUI.Core.Base
 {
     public class Habitacion
     {

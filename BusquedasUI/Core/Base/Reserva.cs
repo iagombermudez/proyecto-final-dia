@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace BusquedasUI.Core
+namespace BusquedasUI.Core.Base
 {
     public class Reserva
     {
@@ -40,6 +40,12 @@ namespace BusquedasUI.Core
             toret.Append("\nIva: " + this.Iva);
 
             return toret.ToString();
+        }
+
+        public string getNumHabitacion()
+        {
+            string habitacion = this.Id.Substring(this.Id.Length - 3);
+            return habitacion;
         }
     }
 }

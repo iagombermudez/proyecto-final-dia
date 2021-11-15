@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace BusquedasUI.Core
+namespace BusquedasUI.Core.Xml
 {
     public class XmlReader
     {

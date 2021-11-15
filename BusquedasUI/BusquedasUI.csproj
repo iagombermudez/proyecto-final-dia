@@ -36,7 +36,7 @@
         <DependentUpon>ReservasCliente.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
-      <Compile Update="UI\ReservasHabitacion.axaml.cs">
+      <Compile Update="UI\ReservasHabitacionWindow.axaml.cs">
         <DependentUpon>ReservasHabitacion.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>

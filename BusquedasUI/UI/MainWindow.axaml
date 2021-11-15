@@ -36,7 +36,7 @@
                 Content="Reservas por persona">
             </Button> 
             <Button
-                Name="ReservasHabitacionBtn"
+                Name="ReservasHabitacionesBtn"
                 HorizontalAlignment="Stretch"
                 HorizontalContentAlignment="Center"
                 Margin="5"

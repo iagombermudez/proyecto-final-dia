@@ -5,6 +5,8 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using BusquedasUI.Core;
+using BusquedasUI.Core.Base;
+using BusquedasUI.Core.Search;
 
 namespace BusquedasUI.UI
 {
@@ -28,7 +30,7 @@ namespace BusquedasUI.UI
             {
                 if (reservasYear.SelectedDate != null) this.OnYearChanged(grid, reservasYear.SelectedDate.Value.Year);
             };
-            reservasHabitaciones = ReservasClientes.GetReservas();
+            reservasHabitaciones = ReservasHabitacion.GetReservas();
             grid.Items = this.reservasHabitaciones;
 
         }
@@ -40,7 +42,7 @@ namespace BusquedasUI.UI
 
         private void OnYearChanged( DataGrid grid, int year)
         {
-            reservasHabitaciones = ReservasClientes.GetReservasPerYear(year);
+            reservasHabitaciones = ReservasHabitacion.GetReservasPerYear(year);
             grid.Items = reservasHabitaciones;
         }
         
