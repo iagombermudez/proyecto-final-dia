@@ -28,7 +28,10 @@ namespace BusquedasUI.UI
             
             reservasYear.PropertyChanged += (_, _) =>
             {
-                if (reservasYear.SelectedDate != null) this.OnYearChanged(grid, reservasYear.SelectedDate.Value.Year);
+                if (reservasYear.SelectedDate != null)
+                {
+                    this.OnYearChanged(grid, reservasYear.SelectedDate.Value.Year);
+                }
             };
             reservasClientes = ReservasClientes.GetReservas();
             grid.Items = this.reservasClientes;
