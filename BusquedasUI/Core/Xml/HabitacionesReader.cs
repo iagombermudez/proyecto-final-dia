@@ -6,15 +6,15 @@ using BusquedasUI.Core.Base;
 
 namespace BusquedasUI.Core.Xml
 {
-    public class HabitacionXmlReader:XmlReader
+    public class HabitacionXmlReader
     {
 
         public List<Habitacion> GetHabitaciones()
         {
             List<Habitacion> toret = new List<Habitacion>();
 
-            XElement raiz = GetRootNode("Habitaciones.xml");
-            IEnumerable<XElement> habitaciones = GetElements(raiz, "Habitacion");
+            XElement raiz = XmlReader.GetRootNode("Habitaciones.xml");
+            IEnumerable<XElement> habitaciones = XmlReader.GetElements(raiz, "Habitacion");
 
             foreach (XElement habitacionXml in habitaciones)
             {
@@ -44,7 +44,7 @@ namespace BusquedasUI.Core.Xml
         private List<String> GetComodidades(XElement habitacionXml)
         {
             var comodidadesElement = habitacionXml.Element("Comodidades");
-            var comodidadesElements = GetElements(comodidadesElement, "Comodidad");
+            var comodidadesElements = XmlReader.GetElements(comodidadesElement, "Comodidad");
             var comodidades = comodidadesElements.Select(comodidad => comodidad.Value).ToList();
             return comodidades;
         }

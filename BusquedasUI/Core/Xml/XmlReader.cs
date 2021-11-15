@@ -4,16 +4,16 @@ using System.Xml.Linq;
 
 namespace BusquedasUI.Core.Xml
 {
-    public class XmlReader
+    public static class XmlReader
     {
 
-        protected XElement GetRootNode(string fileName)
+        public static XElement GetRootNode(string fileName)
         {
             var raiz = XElement.Load(fileName);
             return raiz;
         }
 
-        protected IEnumerable<XElement> GetElements(XElement raiz, string node)
+        public static IEnumerable<XElement> GetElements(XElement raiz, string node)
         {
             var elements =
                 from element in raiz.Elements(node)

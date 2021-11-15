@@ -5,12 +5,12 @@ using BusquedasUI.Core.Base;
 
 namespace BusquedasUI.Core.Xml
 {
-    public class ClienteXmlReader:XmlReader
+    public class ClienteXmlReader
     {
         public List<Cliente> GetClientes()
         {
-            XElement raiz = GetRootNode("Clientes.xml");
-            IEnumerable<XElement> clientes = GetElements(raiz, "Cliente");
+            XElement raiz = XmlReader.GetRootNode("Clientes.xml");
+            IEnumerable<XElement> clientes = XmlReader.GetElements(raiz, "Cliente");
 
             return clientes.Select(GetCliente).ToList();
         }

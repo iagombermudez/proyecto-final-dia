@@ -14,7 +14,12 @@ namespace BusquedasUI.Core.Search
 
             return piso == 0 
                 ? habitacionesSinFiltrar 
-                : habitacionesSinFiltrar.Where(habitacion => habitacion.GetNumPiso() == piso).ToList();
+                : GetHabitacionesFiltradasPorPiso(habitacionesSinFiltrar, piso);
+        }
+        
+        private static List<Habitacion> GetHabitacionesFiltradasPorPiso(List<Habitacion> habitacionesSinFiltrar, int piso)
+        {
+            return habitacionesSinFiltrar.Where(habitacion => habitacion.GetNumPiso() == piso).ToList();
         }
 
         private static List<Habitacion> GetHabitacionesVacias()
@@ -24,12 +29,12 @@ namespace BusquedasUI.Core.Search
             List<Habitacion> habitacionesVacias = new List<Habitacion>();
 
             var today = DateTime.Today;
-            for (int i = 0; i < habitaciones.Count; i++)
+            foreach (var habitacion in habitaciones)
             {
-                var fechaUltimaReserva = DateTime.Parse(habitaciones[i].FechaUltimaReserva);
+                var fechaUltimaReserva = DateTime.Parse(habitacion.FechaUltimaReserva);
                 if (DateTime.Compare(fechaUltimaReserva, today) != 0)
                 {
-                    habitacionesVacias.Add(habitaciones[i]);
+                    habitacionesVacias.Add(habitacion);
                 }
             }
             return habitacionesVacias;

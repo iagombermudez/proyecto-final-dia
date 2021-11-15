@@ -5,15 +5,15 @@ using BusquedasUI.Core.Base;
 
 namespace BusquedasUI.Core.Xml
 {
-    public class ReservaXmlReader:XmlReader
+    public class ReservaXmlReader
     {
 
         public List<Reserva> GetReservas()
         {
             List<Reserva> toret = new List<Reserva>();
             
-            XElement raiz = GetRootNode("Reservas.xml");
-            IEnumerable<XElement> reservas = GetElements(raiz, "Reserva");
+            XElement raiz = XmlReader.GetRootNode("Reservas.xml");
+            IEnumerable<XElement> reservas = XmlReader.GetElements(raiz, "Reserva");
 
             foreach (XElement reservaXml in reservas)
             {
