@@ -18,5 +18,16 @@
         <DependentUpon>App.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="IU\gestionReservas\InsertarReserva.axaml.cs">
+        <DependentUpon>App.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="IU\GeneralMessage.axaml.cs">
+        <DependentUpon>GeneralMessage.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
+    <ItemGroup>
+      <UpToDateCheckInput Remove="gestionReservas\InsertarReserva.axaml" />
     </ItemGroup>
 </Project>
