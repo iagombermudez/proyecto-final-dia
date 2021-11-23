@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Xml.Linq;
+using gestionHotel.core.coreHabitaciones;
 using gestionReservas.core;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace gestionHotel.core.coreReservas.IO
 {
@@ -20,23 +22,25 @@ namespace gestionHotel.core.coreReservas.IO
         private static string DEFAULT_FILE_RESERVAS = "reservas.xml";
 
         private RegistroReservas r;
+       
         public XmlRegistroReservas(RegistroReservas x)
         {
             this.r = x;
+            
         }
 
-        public static RegistroReservas RecuperarXML(string nf)
+        public static RegistroReservas RecuperarXML(string nf,RegistroHabitaciones h)
         {
             XDocument doc=XDocument.Load(nf);
-            return cargarXML(doc.Root);
+            return cargarXML(doc.Root,h);
         }
-        public static RegistroReservas RecuperarXML()
+        public static RegistroReservas RecuperarXML(RegistroHabitaciones h)
         {
             XDocument doc=XDocument.Load(XmlRegistroReservas.DEFAULT_FILE_RESERVAS);
-            return cargarXML(doc.Root);
+            return cargarXML(doc.Root,h);
         }
 
-        private static RegistroReservas cargarXML(XElement root)
+        private static RegistroReservas cargarXML(XElement root, RegistroHabitaciones h)
         {
             string rootTag=root?.Name.ToString() ?? "";
             RegistroReservas toret = new RegistroReservas();
@@ -60,7 +64,9 @@ namespace gestionHotel.core.coreReservas.IO
                     int IVA=Int32.Parse(reserva.Element(TAG_IVA).Value);;
                     double importePorDia=Double.Parse(reserva.Element(TAG_IMPORTE_DIA).Value);;
                     //Cliente cliente, Habitacion habitacion, DateTime fechaEntrada, DateTime fechaSalida, int iva, bool usaGaraje, double precioPorDia
-                    toAdd = new Reserva(new Cliente(cliente),new Habitacion(numHabitacion),fechaEntrada,fechaSalida,IVA,garaje,importePorDia,tipo);
+                    Habitacion habitacion = h.BuscarHabitacion(numHabitacion);
+                    
+                    toAdd = new Reserva(new Cliente(cliente),habitacion,fechaEntrada,fechaSalida,IVA,garaje,importePorDia,tipo);
                     toret.Add(toAdd);
                 }
             }
@@ -88,7 +94,7 @@ namespace gestionHotel.core.coreReservas.IO
                 book.Add(iva);
                 XElement cliente = new XElement(TAG_CLIENTE,reserva.Cliente.Dni);
                 book.Add(cliente);
-                XElement habitacion = new XElement(TAG_NUM_HABITACION,reserva.Habitacion.NumHabitacion);
+                XElement habitacion = new XElement(TAG_NUM_HABITACION,reserva.Habitacion.Id);
                 book.Add(habitacion);
                 XElement importaDia = new XElement(TAG_IMPORTE_DIA,reserva.PrecioPorDia);
                 book.Add(importaDia);

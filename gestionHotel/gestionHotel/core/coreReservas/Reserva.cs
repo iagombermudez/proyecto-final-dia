@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using gestionHotel.core.coreHabitaciones;
 using gestionReservas.core;
 
 namespace gestionHotel.core.coreReservas
@@ -21,7 +22,7 @@ namespace gestionHotel.core.coreReservas
 
         private int GenerateID()
         {
-            string id=this.FechaEntrada.Year+""+this.FechaEntrada.Month+""+this.FechaEntrada.Day+""+this.Habitacion.NumHabitacion+"";
+            string id=this.FechaEntrada.Year+""+this.FechaEntrada.Month+""+this.FechaEntrada.Day+""+this.Habitacion.Id+"";
             return Int32.Parse(id);
         }
         public Cliente Cliente

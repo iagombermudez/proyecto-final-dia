@@ -6,6 +6,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using gestionHotel.core;
+using gestionHotel.core.coreHabitaciones;
 using gestionHotel.core.coreReservas;
 using gestionReservas.core;
 
@@ -92,7 +93,7 @@ namespace gestionHotel.IU.gestionReservas
             var dpHabitaciones = this.FindControl<DockPanel>("dpHabitaciones");
             dpHabitaciones.IsVisible = true;
             var tbNumH = this.FindControl<TextBox>("tbNumHabitacion");
-            tbNumH.Text = this.reservas[this.position].Habitacion.NumHabitacion.ToString();
+            tbNumH.Text = this.reservas[this.position].Habitacion.Id.ToString();
 
             tbDni.IsEnabled = true;
             tbNumH.IsEnabled = true;
@@ -167,7 +168,7 @@ namespace gestionHotel.IU.gestionReservas
                 var dpHabitacoin = this.FindControl<DockPanel>("dpHabitaciones");
                 dpHabitacoin.IsVisible = true;
                 var tbNum = this.FindControl<TextBox>("tbNumHabitacion");
-                tbNum.Text = String.Format("{0}",this._habitacion.NumHabitacion);
+                tbNum.Text = String.Format("{0}",this._habitacion.Id);
             }
             else
             {
@@ -257,7 +258,7 @@ namespace gestionHotel.IU.gestionReservas
 
             foreach (var h in this._habitaciones)
             {
-                if (h.NumHabitacion == num)
+                if (h.Id == num)
                 {
                     toret = true;
                     break;
@@ -383,7 +384,7 @@ namespace gestionHotel.IU.gestionReservas
                 int numHabitacion = Int32.Parse(etNumHabitacion.Text);
                 foreach (var habitacion in this._habitaciones)
                 {
-                    if (habitacion.NumHabitacion == numHabitacion)
+                    if (habitacion.Id == numHabitacion)
                     {
                         toret = habitacion;
                         break;

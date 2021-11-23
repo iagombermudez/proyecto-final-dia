@@ -26,6 +26,10 @@
         <DependentUpon>GeneralMessage.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="IU\gestionHabitaciones\InsertarHabitacion.axaml.cs">
+        <DependentUpon>InsertarReserva.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
     <ItemGroup>
       <UpToDateCheckInput Remove="gestionReservas\InsertarReserva.axaml" />
