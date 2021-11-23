@@ -8,7 +8,6 @@ using Avalonia.Markup.Xaml;
 using gestionHotel.core;
 using gestionHotel.core.coreHabitaciones;
 using gestionHotel.core.coreReservas;
-using gestionReservas.core;
 
 namespace gestionHotel.IU.gestionHabitaciones
 {

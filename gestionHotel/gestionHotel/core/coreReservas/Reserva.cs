@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
+using gestionHotel.core.coreClientes;
 using gestionHotel.core.coreHabitaciones;
-using gestionReservas.core;
 
 namespace gestionHotel.core.coreReservas
 {
