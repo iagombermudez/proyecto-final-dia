@@ -1,0 +1,97 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="hotelCrud.NETCoreApp.MainWindow"
+        Title="hotelCrud.NETCoreApp"
+        MinWidth="1150"
+        MinHeight="600"
+        Width="1150"
+        Height="600">
+    
+        <StackPanel Margin="7"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Background="#EFF171">
+                
+                        <Label Margin="5" Content="Bienvenido"></Label>
+                        <Menu
+                                VerticalAlignment="Top">
+                    
+                                <MenuItem Header="Archivo">
+                                        <MenuItem Header="Guardar" Name="OpGuardar" />
+                                        <MenuItem Header="Salir" Name="OpExit" />
+                                </MenuItem>
+                        </Menu>
+                
+                <DockPanel Margin="5" HorizontalAlignment="Left">
+                               
+                        <Button Background="LightBlue" Margin="5" Content="Insertar" Name="OpInsert"></Button>
+                        <Button Background="LightBlue" Margin="5" Content="Modificar" Name="btModificar"></Button>
+                        <Button Background="LightBlue" Margin="5" Content="Eliminar" Name="btEliminar"></Button>
+                                
+                </DockPanel>
+                
+                        <DockPanel
+                                Margin="5"
+                                VerticalAlignment="Stretch">
+                
+                                <Border    Margin="5"
+                                           BorderThickness="1"
+                                           CornerRadius="3"
+                                           BorderBrush="Black">
+                                          <Grid>
+                                                  
+                                                  <!--
+                                                        Name: Identificador.
+                                                        Margin: Distancia.
+                                                        AutoGenerateColumns: Obtiene o establece un valor que indica si las columnas se crean automáticamente cuando se establece la propiedad Avalonia.Controls.DataGrid.ItemsSource.
+                                                        IsReadOnly: Obtiene o establece un valor que indica si el usuario puede editar los valores en el control.
+                                                        SelectionMode: Obtiene o establece el comportamiento de selección de la cuadrícula de datos.
+                                                        AlternatingRowBackground: Obtiene o establece System.Windows.Media.Brush que se usa para pintar el fondo de las filas impares.
+                                                  -->
+                                                  <DataGrid Name="DtHabitaciones"
+                                                            Margin="5"
+                                                            AutoGenerateColumns="False"
+                                                            IsReadOnly="True"
+                                                            SelectionMode="Single"
+                                                            AlternatingRowBackground="LightBlue"
+                                                            VerticalAlignment="Stretch"
+                                                            HorizontalAlignment="Stretch"
+                                                            MinHeight="250"
+                                                  >
+                                    
+                                                        <!--
+                                                                DataGrid.Columns: Obtiene o establece el comportamiento de selección de la cuadrícula de datos.
+                                                                Header: Título de las cuadrículas.
+                                                                Binding: Obtiene o establece el enlace que asocia la columna con una propiedad en el origen de datos.
+                                                        -->
+                                                        
+                                                        
+                                                        
+                                                        <DataGrid.Columns>
+                                                                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                                                                <DataGridTextColumn Header="Piso" Binding="{Binding Piso}" />
+                                                                <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}" />
+                                                                <DataGridTextColumn Header="Fecha última renovación" Binding="{Binding FechaRenovacion}" />
+                                                                <DataGridTextColumn Header="Fecha de última reserva" Binding="{Binding FechaReserva}" />
+                                                                <DataGridTextColumn Header="Wifi" Binding="{Binding Wifi}" />
+                                                                <DataGridTextColumn Header="Caja Fuerte" Binding="{Binding CajaFuerte}" />
+                                                                <DataGridTextColumn Header="Mini Bar" Binding="{Binding MiniBar}" />
+                                                                <DataGridTextColumn Header="Baño" Binding="{Binding Bano}" />
+                                                                <DataGridTextColumn Header="Cocina" Binding="{Binding Cocina}" />
+                                                                <DataGridTextColumn Header="TV" Binding="{Binding Tv}" />
+                                                        </DataGrid.Columns>
+                                                        
+                                                  </DataGrid>
+                                                  
+                                          </Grid>
+                                        
+                                </Border>
+                                
+                        </DockPanel>
+                
+        </StackPanel>
+        
+</Window>
