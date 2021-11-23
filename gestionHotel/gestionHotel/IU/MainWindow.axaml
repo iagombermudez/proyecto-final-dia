@@ -1,0 +1,82 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="gestionHotel.IU.MainWindow"
+        Title="gestionHotel">
+    <StackPanel Margin="7"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch">
+                        
+                        
+                        <Label Margin="5" Content="Bienvenido"></Label>
+                        <Menu
+                                VerticalAlignment="Top">
+                    
+                                <MenuItem Header="Reservas">
+                                        
+                                </MenuItem>
+                                <MenuItem Header="Habitaciones">
+                                        
+                                       
+                                </MenuItem>
+                                <MenuItem Header="Clientes">
+                                        
+                                       
+                                </MenuItem>
+                                <MenuItem Header="Graficos">
+                                        
+                                </MenuItem>
+                                <MenuItem Header="Archivo">
+                                        <MenuItem Header="Guardar" Name="OpGuardar" />
+                                        <MenuItem Header="Salir" Name="OpExit" />
+                                </MenuItem>
+                               
+                        </Menu>
+                
+                        <DockPanel
+                                Margin="5"
+                                VerticalAlignment="Stretch">
+                
+                                <Border    Margin="5"
+                                           BorderThickness="1"
+                                           CornerRadius="3"
+                                           BorderBrush="Black">
+                                          <Grid>
+                                                <DataGrid Name="DtReservas"
+                                                          Margin="5"
+                                                          AutoGenerateColumns="False"
+                                                          IsReadOnly="True"
+                                                          SelectionMode="Single"
+                                                          AlternatingRowBackground="LightBlue"
+                                                          MinHeight="250">
+                                    
+                                    
+                                                        <DataGrid.Columns>
+                                                                <DataGridTextColumn Header="ID"  Binding="{Binding }" />
+                                                                <DataGridTextColumn Header="Cliente"  Binding="{Binding }" />
+                                                                <DataGridTextColumn Header="Habitacion"  Binding="{Binding }" />
+                                                                <DataGridTextColumn Header="Importe por dia"  Binding="{Binding }" />
+                                                                <DataGridTextColumn Header="Fecha de entrada"  Binding="{Binding }" />
+                                                                <DataGridTextColumn Header="Fecha de salida" Binding="{Binding }" />
+                                                                <DataGridTextColumn Header="Tipo" Binding="{Binding }" />
+                                                                <DataGridTextColumn Header="Garaje" Binding="{Binding }" />
+                                                                <DataGridTextColumn Header="IVA aplicado" Binding="{Binding }" />
+                                                                
+                                                        </DataGrid.Columns>
+                                                        
+                                                        
+                                                        
+                                                </DataGrid>
+                                                  
+                                          </Grid>
+                                </Border>
+                                
+                    
+                        </DockPanel>
+          
+                        
+                
+    </StackPanel> 
+</Window>
