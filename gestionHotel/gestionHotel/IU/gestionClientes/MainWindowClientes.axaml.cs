@@ -52,8 +52,7 @@ namespace gestionHotel.IU.gestionClientes
             var lblDesc = this.FindControl<Label>( "LblDesc" );
             
             Cliente cliente = (Cliente) dtClientes.SelectedItem;
-            lblDesc.Content = $"{cliente}";
-            
+
         }
         
         void OnSave()
