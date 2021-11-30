@@ -31,10 +31,9 @@ namespace gestionHotel.IU.gestionClientes
             opDel.Click += (_, _) => this.OnDel((Cliente) dtClientes.SelectedItem);
             btMod.Click += (_, _) => this.OnMod((Cliente) dtClientes.SelectedItem);
             opMod.Click += (_, _) => this.OnMod((Cliente) dtClientes.SelectedItem);
-            dtClientes.SelectionChanged += (_, _) => this.OnSelected();
             
             this.Closed += (_, _) => this.OnSave();
-            
+
             this.RegistroClientes = RegistroClientes.RecuperaXml();
             dtClientes.Items = this.RegistroClientes;
             
@@ -44,15 +43,6 @@ namespace gestionHotel.IU.gestionClientes
         {
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             AvaloniaXamlLoader.Load(this);
-        }
-        
-        void OnSelected()
-        {
-            var dtClientes = this.FindControl<DataGrid>( "DtClientes" );
-            var lblDesc = this.FindControl<Label>( "LblDesc" );
-            
-            Cliente cliente = (Cliente) dtClientes.SelectedItem;
-
         }
         
         void OnSave()
@@ -70,6 +60,7 @@ namespace gestionHotel.IU.gestionClientes
         
         async void OnInsert()
         {
+            
             var insertView = new InsertViewClientes();
             await insertView.ShowDialog( this );
 
@@ -98,33 +89,50 @@ namespace gestionHotel.IU.gestionClientes
 
         async void OnDel(Cliente cliente)
         {
-            var confirmar = new GeneralMessage("Está seguro de que desea eliminar el cliente?", true);
-            await confirmar.ShowDialog( this );
 
-            if (!confirmar.IsCancelled)
+            if (cliente == null)
             {
-                RegistroClientes.Remove(cliente);
+                new GeneralMessage("No se ha seleccionado una fila",false).Show();
+            }
+            else
+            {
+                var confirmar = new GeneralMessage("Está seguro de que desea eliminar el cliente?", true);
+                await confirmar.ShowDialog( this );
+
+                if (!confirmar.IsCancelled)
+                {
+                    RegistroClientes.Remove(cliente);
+                }
             }
             
         }
         
         async void OnMod(Cliente cliente)
         {
-            
-            var modifyView = new ModifyViewClientes(cliente);
-            await modifyView.ShowDialog( this );
+            if (cliente == null)
+            {
+                new GeneralMessage("No se ha seleccionado una fila",false).Show();
+            }
+            else
+            {
 
-            if ( !modifyView.IsCancelled ) {
+                var modifyView = new ModifyViewClientes(cliente);
+                await modifyView.ShowDialog(this);
 
-                this.RegistroClientes.Add(
+                if (!modifyView.IsCancelled)
+                {
+
+                    this.RegistroClientes.Add(
                         new Cliente(cliente.Dni, modifyView.Nombre, modifyView.Telefono,
                             modifyView.Email, modifyView.Direccion));
-                this.RegistroClientes.Remove(cliente);
+                    this.RegistroClientes.Remove(cliente);
+
+
+                }
+                modifyView.Close();
+            }
 
             
-            }
-            
-            modifyView.Close();
         }
         
         public RegistroClientes RegistroClientes {

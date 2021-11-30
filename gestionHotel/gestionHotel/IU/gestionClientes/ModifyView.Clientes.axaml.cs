@@ -35,6 +35,8 @@ namespace gestionHotel.IU.gestionClientes {
             btOk.Click += (_, _) => this.OnExit();
             btCancel.Click += (_, _) => this.OnCancelClicked();
             
+            this.Closed += (_, _) => this.OnCancelClicked();
+            
         }
 
         void InitializeComponent()

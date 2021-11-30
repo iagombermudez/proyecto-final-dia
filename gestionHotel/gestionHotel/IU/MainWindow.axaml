@@ -21,7 +21,7 @@
                                         
                                        
                                 </MenuItem>
-                                <MenuItem Header="Clientes">
+                                <MenuItem Header="Clientes" Name="OpClientes">
                                         
                                        
                                 </MenuItem>
