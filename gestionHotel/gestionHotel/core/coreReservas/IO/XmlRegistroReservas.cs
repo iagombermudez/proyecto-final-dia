@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Linq;
+using gestionHotel.core.coreClientes;
 using gestionHotel.core.coreHabitaciones;
-using gestionReservas.core;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace gestionHotel.core.coreReservas.IO
@@ -29,18 +29,18 @@ namespace gestionHotel.core.coreReservas.IO
             
         }
 
-        public static RegistroReservas RecuperarXML(string nf,RegistroHabitaciones h)
+        public static RegistroReservas RecuperarXML(string nf,RegistroHabitaciones h, RegistroClientes c)
         {
             XDocument doc=XDocument.Load(nf);
-            return cargarXML(doc.Root,h);
+            return cargarXML(doc.Root,h, c);
         }
-        public static RegistroReservas RecuperarXML(RegistroHabitaciones h)
+        public static RegistroReservas RecuperarXML(RegistroHabitaciones h, RegistroClientes c)
         {
             XDocument doc=XDocument.Load(XmlRegistroReservas.DEFAULT_FILE_RESERVAS);
-            return cargarXML(doc.Root,h);
+            return cargarXML(doc.Root,h, c);
         }
 
-        private static RegistroReservas cargarXML(XElement root, RegistroHabitaciones h)
+        private static RegistroReservas cargarXML(XElement root, RegistroHabitaciones h, RegistroClientes c)
         {
             string rootTag=root?.Name.ToString() ?? "";
             RegistroReservas toret = new RegistroReservas();
@@ -52,10 +52,9 @@ namespace gestionHotel.core.coreReservas.IO
                 foreach (var reserva in elems)
                 {
                     
-                    int numHabitacion=Int32.Parse(reserva.Element(TAG_NUM_HABITACION).Value); //AQUI DEBERIA LLAMAR AL CARGARXML DE HABITACION
+                    int numHabitacion=Int32.Parse(reserva.Element(TAG_NUM_HABITACION).Value); 
                     
-                    
-                    string cliente = reserva.Element(TAG_CLIENTE).Value; //AQUI DEBERIA LLAMAR AL CARGARXML DE CLIENTE
+                    string dniCliente = reserva.Element(TAG_CLIENTE).Value; 
 
                     string tipo = reserva.Element(TAG_TIPO).Value;
                     DateTime fechaEntrada=Convert.ToDateTime(reserva.Element(TAG_FECHA_ENTRADA).Value);
@@ -63,10 +62,12 @@ namespace gestionHotel.core.coreReservas.IO
                     bool garaje=Boolean.Parse(reserva.Element(TAG_GARAJE).Value);
                     int IVA=Int32.Parse(reserva.Element(TAG_IVA).Value);;
                     double importePorDia=Double.Parse(reserva.Element(TAG_IMPORTE_DIA).Value);;
-                    //Cliente cliente, Habitacion habitacion, DateTime fechaEntrada, DateTime fechaSalida, int iva, bool usaGaraje, double precioPorDia
-                    Habitacion habitacion = h.BuscarHabitacion(numHabitacion);
                     
-                    toAdd = new Reserva(new Cliente(cliente),habitacion,fechaEntrada,fechaSalida,IVA,garaje,importePorDia,tipo);
+                    
+                    Habitacion habitacion = h.BuscarHabitacion(numHabitacion);
+                    Cliente cliente = c.BuscarPorDni(dniCliente);
+                    
+                    toAdd = new Reserva(cliente,habitacion,fechaEntrada,fechaSalida,IVA,garaje,importePorDia,tipo);
                     toret.Add(toAdd);
                 }
             }

@@ -6,16 +6,14 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using gestionHotel.core;
+using gestionHotel.core.coreClientes;
 using gestionHotel.core.coreHabitaciones;
 using gestionHotel.core.coreReservas;
-using gestionReservas.core;
 
 namespace gestionHotel.IU.gestionReservas
 {
     public partial class InsertarReserva : Window
     {
-
-        
         
         private RegistroReservas reservas;
         private Cliente _cliente;

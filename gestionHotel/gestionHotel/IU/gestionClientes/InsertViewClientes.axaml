@@ -1,0 +1,70 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Width="300" Height="350"
+        MinWidth="300" MinHeight="350"
+        MaxWidth="600" MaxHeight="350"
+        x:Class="gestionHotel.IU.gestionClientes.InsertViewClientes"
+        Title="Insertar reserva">
+    
+    <StackPanel Margin="5">
+        <Border
+            BorderThickness="1"
+            CornerRadius="3"
+            BorderBrush="Black"
+            VerticalAlignment="Stretch">
+            
+            <StackPanel
+                Orientation="Vertical">
+                
+                <DockPanel Margin="5">
+                    <Label Margin="5" Content="Dni" DockPanel.Dock="Left" HorizontalAlignment="Left" />
+                    <TextBox Margin="5" Name="EdDni" />
+                </DockPanel>
+                
+                <DockPanel Margin="5">
+                    <Label Margin="5" Content="Nombre" DockPanel.Dock="Left" HorizontalAlignment="Left" />
+                    <TextBox Margin="5" Name="EdNom"/>
+                </DockPanel>
+                                    
+                <DockPanel Margin="5">
+                    <Label Margin="5" Content="Telefono" DockPanel.Dock="Left" HorizontalAlignment="Left" />
+                    <TextBox Margin="5" Name="EdTelf"/>
+                </DockPanel>
+                                    
+                <DockPanel Margin="5">
+                    <Label Margin="5" Content="Email" DockPanel.Dock="Left" HorizontalAlignment="Left" />
+                    <TextBox Margin="5" Name="EdEmail"/>
+                </DockPanel><DockPanel Margin="5">
+                                        
+                <Label Margin="5" Content="Direccion Postal" DockPanel.Dock="Left" HorizontalAlignment="Left" />
+                    <TextBox Margin="5" Name="EdDir"/>
+                </DockPanel>
+                
+            </StackPanel>
+            
+        </Border>
+        
+        <StackPanel
+            Orientation="Horizontal"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Margin="5">
+            
+            <Button Name="BtCancel"
+                    Content="Cancelar"
+                    Margin="5"
+                    HorizontalContentAlignment="Center"
+                    HorizontalAlignment="Center" />
+            
+            <Button Name="BtOk"
+                    Content="Guardar"
+                    Margin="5"
+                    HorizontalContentAlignment="Center"
+                    HorizontalAlignment="Center" />
+            
+        </StackPanel>
+    </StackPanel>
+</Window>
