@@ -10,8 +10,7 @@
         MaxHeight="1000" MaxWidth="1000">
    <StackPanel Margin="7"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Background="#EFF171">
+                VerticalAlignment="Center">
         
             <DockPanel Name="dpId" Margin="5" IsVisible="true">
                 <Label Margin="5" Width="150">Id</Label>

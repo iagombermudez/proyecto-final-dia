@@ -17,7 +17,7 @@
                                 <MenuItem Header="Reservas">
                                         
                                 </MenuItem>
-                                <MenuItem Header="Habitaciones">
+                                <MenuItem Header="Habitaciones" Name="OpHabitaciones">
                                         
                                        
                                 </MenuItem>
