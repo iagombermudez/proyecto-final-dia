@@ -18,11 +18,11 @@ namespace gestionHotel.IU.gestionReservas
         private RegistroReservas reservas;
         private Cliente _cliente;
         private Habitacion _habitacion;
-        private List<Cliente> _clientes;
-        private List<Habitacion> _habitaciones;
+        private RegistroClientes _clientes;
+        private RegistroHabitaciones _habitaciones;
         //private Reserva r;
         private int position;
-        public InsertarReserva(RegistroReservas reservas,List<Cliente> clientes, List<Habitacion> habitaciones,Cliente cliente, Habitacion habitacion):this()
+        public InsertarReserva(RegistroReservas reservas,RegistroClientes clientes, RegistroHabitaciones habitaciones,Cliente cliente, Habitacion habitacion):this()
         {
             this.position = -1;
             this.reservas = reservas;
@@ -34,7 +34,7 @@ namespace gestionHotel.IU.gestionReservas
             this.drawButton("Insertar"); 
         }
         
-        public InsertarReserva(RegistroReservas reservas, List<Cliente> clientes, List<Habitacion> habitaciones):this()
+        public InsertarReserva(RegistroReservas reservas, RegistroClientes clientes, RegistroHabitaciones habitaciones):this()
         {
             this.position = -1;
             this.reservas = reservas;
@@ -46,7 +46,7 @@ namespace gestionHotel.IU.gestionReservas
         }
         
         //Constructor para modificacion
-        public InsertarReserva(RegistroReservas reservas,int position, List<Cliente> clientes,List<Habitacion> habitaciones):this()
+        public InsertarReserva(RegistroReservas reservas,int position, RegistroClientes clientes,RegistroHabitaciones habitaciones):this()
         {
             this.reservas = reservas;
             this.position = position;

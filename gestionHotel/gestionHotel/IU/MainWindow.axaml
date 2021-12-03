@@ -15,7 +15,8 @@
                                 VerticalAlignment="Top">
                     
                                 <MenuItem Header="Reservas">
-                                        
+                                        <MenuItem Header="Ver reservas" Name="OpVerReservas" />
+                                       
                                 </MenuItem>
                                 <MenuItem Header="Habitaciones" Name="OpHabitaciones">
                                         
