@@ -32,6 +32,9 @@ namespace gestionHotel.IU
             var opVerReservas = this.FindControl<MenuItem>("OpVerReservas");
             opVerReservas.Click += (_, _) => this.OpVerReservas();
 
+            var opSalir = this.FindControl<MenuItem>("OpExit");
+            opSalir.Click += (_, _) => this.OpSalir();
+
             
             try
             {
@@ -42,8 +45,15 @@ namespace gestionHotel.IU
                 this.rg = new RegistroGeneral();
             }
             
+            //CARGAR DATRAGRID CON RESULTADO DE BUSQUEDA DE HABITACIONES LIBRES
+            var dtHabitacionesLibres = this.FindControl<DataGrid>("DtHabitacionesLibres");
             
-                       
+            //dtHabitacionesLibres.Items=
+        }
+
+        private void OpSalir()
+        {
+            this.Close();
         }
 
         private async void OpVerReservas()

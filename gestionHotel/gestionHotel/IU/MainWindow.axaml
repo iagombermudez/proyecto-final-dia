@@ -14,6 +14,10 @@
                         <Menu
                                 VerticalAlignment="Top">
                     
+                                <MenuItem Header="Archivo">
+                                        <MenuItem Header="Guardar" Name="OpGuardar" />
+                                        <MenuItem Header="Salir" Name="OpExit" />
+                                </MenuItem>
                                 <MenuItem Header="Reservas">
                                         <MenuItem Header="Ver reservas" Name="OpVerReservas" />
                                        
@@ -29,10 +33,7 @@
                                 <MenuItem Header="Graficos">
                                         
                                 </MenuItem>
-                                <MenuItem Header="Archivo">
-                                        <MenuItem Header="Guardar" Name="OpGuardar" />
-                                        <MenuItem Header="Salir" Name="OpExit" />
-                                </MenuItem>
+                                
                                
                         </Menu>
                 
@@ -47,7 +48,7 @@
                                          <Grid>
                                                   
                                                   
-                                                  <DataGrid Name="DtHabitaciones"
+                                                  <DataGrid Name="DtHabitacionesLibres"
                                                             Margin="5"
                                                             AutoGenerateColumns="False"
                                                             IsReadOnly="True"
