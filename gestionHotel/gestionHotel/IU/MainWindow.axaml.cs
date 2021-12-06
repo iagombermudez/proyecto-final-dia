@@ -1,7 +1,12 @@
+using System;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using gestionHotel.core;
 using gestionHotel.core.coreClientes;
+using gestionHotel.core.coreHabitaciones;
+using gestionHotel.core.IO;
 using gestionHotel.IU.gestionClientes;
 using gestionHotel.IU.gestionHabitaciones;
 using gestionHotel.IU.gestionReservas;
@@ -10,6 +15,7 @@ namespace gestionHotel.IU
 {
     public partial class MainWindow : Window
     {
+        private RegistroGeneral rg;
         public MainWindow()
         {
             InitializeComponent();
@@ -25,6 +31,19 @@ namespace gestionHotel.IU
 
             var opVerReservas = this.FindControl<MenuItem>("OpVerReservas");
             opVerReservas.Click += (_, _) => this.OpVerReservas();
+
+            
+            try
+            {
+                this.rg = XmlGeneral.cargarXML("infoGeneral.xml"); 
+            }
+            catch (Exception e)
+            {
+                this.rg = new RegistroGeneral();
+            }
+            
+            
+                       
         }
 
         private async void OpVerReservas()
@@ -34,7 +53,7 @@ namespace gestionHotel.IU
 
         private async void OpenHabitaciones()
         {
-            await new GestionHabitaciones().ShowDialog(this);
+            await new GestionHabitaciones(this.rg).ShowDialog(this);
         }
         private async void OpenClientes()
         {

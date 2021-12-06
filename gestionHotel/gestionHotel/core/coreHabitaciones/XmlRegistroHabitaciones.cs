@@ -6,7 +6,7 @@ namespace hotel.IO
 {
     public class XmlRegistroHabitaciones
     {
-        private static string TAG_ROOT="habitaciones";
+        public static string TAG_ROOT="habitaciones";
         private static string TAG_HABITACION="habitacion";
         private static string TAG_ID="id";
         private static string TAG_TIPO="tipo";
@@ -37,7 +37,7 @@ namespace hotel.IO
             return cargarXML(doc.Root);
         }
 
-        private static RegistroHabitaciones cargarXML(XElement root)
+        public static RegistroHabitaciones cargarXML(XElement root)
         {
             string rootTag = root?.Name.ToString() ?? "";
             RegistroHabitaciones toret = new RegistroHabitaciones();

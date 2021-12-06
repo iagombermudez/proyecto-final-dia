@@ -8,7 +8,7 @@ namespace gestionHotel.core.coreReservas.IO
 {
     public class XmlRegistroReservas
     {
-        private static string TAG_ROOT="rerservas";
+        public static string TAG_ROOT="rerservas";
         private static string TAG_RESERVA="reserva";
         private static string TAG_ID="ID_reserva";
         private static string TAG_TIPO="tipo";
@@ -40,7 +40,7 @@ namespace gestionHotel.core.coreReservas.IO
             return cargarXML(doc.Root,h, c);
         }
 
-        private static RegistroReservas cargarXML(XElement root, RegistroHabitaciones h, RegistroClientes c)
+        public static RegistroReservas cargarXML(XElement root, RegistroHabitaciones h, RegistroClientes c)
         {
             string rootTag=root?.Name.ToString() ?? "";
             RegistroReservas toret = new RegistroReservas();

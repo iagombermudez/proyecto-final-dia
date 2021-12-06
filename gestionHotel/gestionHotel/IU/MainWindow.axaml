@@ -44,32 +44,37 @@
                                            BorderThickness="1"
                                            CornerRadius="3"
                                            BorderBrush="Black">
-                                          <Grid>
-                                                <DataGrid Name="DtReservas"
-                                                          Margin="5"
-                                                          AutoGenerateColumns="False"
-                                                          IsReadOnly="True"
-                                                          SelectionMode="Single"
-                                                          AlternatingRowBackground="LightBlue"
-                                                          MinHeight="250">
-                                    
-                                    
+                                         <Grid>
+                                                  
+                                                  
+                                                  <DataGrid Name="DtHabitaciones"
+                                                            Margin="5"
+                                                            AutoGenerateColumns="False"
+                                                            IsReadOnly="True"
+                                                            SelectionMode="Single"
+                                                            AlternatingRowBackground="LightBlue"
+                                                            VerticalAlignment="Stretch"
+                                                            HorizontalAlignment="Stretch"
+                                                            MinHeight="250">
+                                     
+                                                       
+                                                        
+                                                        
                                                         <DataGrid.Columns>
-                                                                <DataGridTextColumn Header="ID"  Binding="{Binding }" />
-                                                                <DataGridTextColumn Header="Cliente"  Binding="{Binding }" />
-                                                                <DataGridTextColumn Header="Habitacion"  Binding="{Binding }" />
-                                                                <DataGridTextColumn Header="Importe por dia"  Binding="{Binding }" />
-                                                                <DataGridTextColumn Header="Fecha de entrada"  Binding="{Binding }" />
-                                                                <DataGridTextColumn Header="Fecha de salida" Binding="{Binding }" />
-                                                                <DataGridTextColumn Header="Tipo" Binding="{Binding }" />
-                                                                <DataGridTextColumn Header="Garaje" Binding="{Binding }" />
-                                                                <DataGridTextColumn Header="IVA aplicado" Binding="{Binding }" />
-                                                                
+                                                                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                                                                <DataGridTextColumn Header="Piso" Binding="{Binding Piso}" />
+                                                                <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}" />
+                                                                <DataGridTextColumn Header="Fecha última renovación" Binding="{Binding FechaRenovacion}" />
+                                                                <DataGridTextColumn Header="Fecha de última reserva" Binding="{Binding FechaReserva}" />
+                                                                <DataGridTextColumn Header="Wifi" Binding="{Binding Wifi}" />
+                                                                <DataGridTextColumn Header="Caja Fuerte" Binding="{Binding CajaFuerte}" />
+                                                                <DataGridTextColumn Header="Mini Bar" Binding="{Binding MiniBar}" />
+                                                                <DataGridTextColumn Header="Baño" Binding="{Binding Bano}" />
+                                                                <DataGridTextColumn Header="Cocina" Binding="{Binding Cocina}" />
+                                                                <DataGridTextColumn Header="TV" Binding="{Binding Tv}" />
                                                         </DataGrid.Columns>
                                                         
-                                                        
-                                                        
-                                                </DataGrid>
+                                                  </DataGrid>
                                                   
                                           </Grid>
                                 </Border>

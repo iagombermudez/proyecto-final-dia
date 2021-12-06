@@ -5,7 +5,9 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.OpenGL.Angle;
+using gestionHotel.core;
 using gestionHotel.core.coreHabitaciones;
+using gestionHotel.core.IO;
 using gestionHotel.IU;
 using gestionHotel.IU.gestionHabitaciones;
 using hotel;
@@ -16,23 +18,13 @@ namespace gestionHotel.IU.gestionHabitaciones
     public partial class GestionHabitaciones : Window
     {
         
-        private RegistroHabitaciones listaHabitaciones;
+        private RegistroGeneral registroGeneral;
         
-        public GestionHabitaciones()
+
+        public GestionHabitaciones(RegistroGeneral rg):this()
         {
-            InitializeComponent();
-#if DEBUG
-            this.AttachDevTools();
-#endif
             
-            try
-            {
-                listaHabitaciones = this.OnLoad("habitaciones.xml");
-            }
-            catch (Exception exc)
-            {
-                listaHabitaciones = new RegistroHabitaciones();
-            }
+            this.registroGeneral = rg;
             
             var opInsertar = this.FindControl<Button>("OpInsert");
             var dtHabitaciones = this.FindControl<DataGrid>("DtHabitaciones");
@@ -41,20 +33,29 @@ namespace gestionHotel.IU.gestionHabitaciones
             var opEliminar = this.FindControl<Button>("btEliminar");
                 
             //Para que el datagrid se cargue con los datos del txt.
-            dtHabitaciones.Items = this.listaHabitaciones;
-            opGuardar.Click += (_, _) => this.OnSave("habitaciones.xml");
+            dtHabitaciones.Items = this.registroGeneral.H;
+            opGuardar.Click += (_, _) => this.OnSave("infoGeneral.xml");
             opInsertar.Click += (_, _) => this.Insertar();
             opEliminar.Click += (_, _) => this.Eliminar(dtHabitaciones.SelectedIndex);
             opModificar.Click += (_, _) => this.Modificar(dtHabitaciones.SelectedIndex);
-            
+
+        }
+        public GestionHabitaciones()
+        {
+            InitializeComponent();
+#if DEBUG
+            this.AttachDevTools();
+#endif
+
         }
         private void OnSave(string nf)
         {
-            XmlRegistroHabitaciones toXml = new XmlRegistroHabitaciones(this.listaHabitaciones);
-            toXml.Guardar(nf);
+            //XmlRegistroHabitaciones toXml = new XmlRegistroHabitaciones(this.registroGeneral.H);
+            XmlGeneral toXml = new XmlGeneral(this.registroGeneral);
+            toXml.GuardarInfoGeneral(nf);
         }
         
-        private async void Insertar() { await new InsertarHabitacion(listaHabitaciones).ShowDialog(this); }
+        private async void Insertar() { await new InsertarHabitacion(this.registroGeneral.H).ShowDialog(this); }
 
         private void Eliminar(int position)
         {
@@ -62,7 +63,7 @@ namespace gestionHotel.IU.gestionHabitaciones
             {
                 try
                 {
-                    this.listaHabitaciones.RemoveAt(position);
+                    this.registroGeneral.H.RemoveAt(position);
                 }
                 catch (Exception e)
                 {
@@ -75,7 +76,7 @@ namespace gestionHotel.IU.gestionHabitaciones
 
         private void Modificar(int position)
         {
-            if (position != -1) { new InsertarHabitacion(listaHabitaciones,listaHabitaciones[position]).ShowDialog(this); }
+            if (position != -1) { new InsertarHabitacion(this.registroGeneral.H,this.registroGeneral.H[position]).ShowDialog(this); }
             else { new GeneralMessage("No se ha seleccionado una fila",false).Show(); }
         }
 
@@ -84,7 +85,7 @@ namespace gestionHotel.IU.gestionHabitaciones
         private void OnUpdateCount()
         {
             var count = this.FindControl<Label>("LbNumReservas");
-            count.Content=this.listaHabitaciones.Length.ToString();
+            count.Content=this.registroGeneral.H.Length.ToString();
         }
         
         private void InitializeComponent()
