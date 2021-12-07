@@ -15,49 +15,48 @@ namespace gestionHotel.IU.gestionReservas
 {
     public partial class MenuReservas : Window
     {
-        private RegistroClientes c;
-        private RegistroHabitaciones h;
-        private RegistroReservas listaReservas;
-        public MenuReservas()
-        {
-            InitializeComponent();
-#if DEBUG
-            this.AttachDevTools();
-#endif
+        //private RegistroClientes c;
+        //private RegistroHabitaciones h;
+        //private RegistroReservas listaReservas;
 
-            try
-            {
-                listaReservas = this.OnLoad("reservas.txt");
-            }
-            catch (Exception exc)
-            {
-                listaReservas = new RegistroReservas();
-            }
+        private RegistroGeneral rg;
+
+        public MenuReservas(RegistroGeneral rg):this()
+        {
+            
+            this.rg=rg;
+            
             //List<Cliente> clientes = new List<Cliente>();
             //List<Habitacion> habitacions = new List<Habitacion>();
             RegistroClientes clientes = new RegistroClientes();
             RegistroHabitaciones habitaciones = new RegistroHabitaciones();
                 
 
-                this.c = clientes;
-                this.h = habitaciones;
-                var opInsertar = this.FindControl<MenuItem>("OpInsert");
-                var dtReservas = this.FindControl<DataGrid>("DtReservas");
-                var opGuardar = this.FindControl<MenuItem>("OpGuardar");
-                var opModificar = this.FindControl<Button>("btModificar");
-                var opEliminar = this.FindControl<Button>("btEliminar");
-                var opSalir = this.FindControl<MenuItem>("OpExit");
-                var opFactura = this.FindControl<Button>("btFactura");
+            
+            var opInsertar = this.FindControl<MenuItem>("OpInsert");
+            var dtReservas = this.FindControl<DataGrid>("DtReservas");
+            var opGuardar = this.FindControl<MenuItem>("OpGuardar");
+            var opModificar = this.FindControl<Button>("btModificar");
+            var opEliminar = this.FindControl<Button>("btEliminar");
+            var opSalir = this.FindControl<MenuItem>("OpExit");
+            var opFactura = this.FindControl<Button>("btFactura");
                 
-                dtReservas.Items = this.listaReservas;
+            dtReservas.Items = this.rg.R;
                 
-                opGuardar.Click += (_, _) => this.OnSave("reservas.txt");
-                opInsertar.Click += (_, _) => this.OnInsert();
-                opEliminar.Click += (_, _) => this.OnDelete(dtReservas.SelectedIndex);
-                opModificar.Click += (_, _) => this.OnModify(dtReservas.SelectedIndex);
-                opFactura.Click += (_, _) => this.onGenerateReceipt(dtReservas.SelectedIndex);
-                opSalir.Click += (_, _) => this.OnExit();
-
+            opGuardar.Click += (_, _) => this.OnSave("reservas.txt");
+            opInsertar.Click += (_, _) => this.OnInsert();
+            opEliminar.Click += (_, _) => this.OnDelete(dtReservas.SelectedIndex);
+            opModificar.Click += (_, _) => this.OnModify(dtReservas.SelectedIndex);
+            opFactura.Click += (_, _) => this.onGenerateReceipt(dtReservas.SelectedIndex);
+            opSalir.Click += (_, _) => this.OnExit();
+            
+        }
+        public MenuReservas()
+        {
+            InitializeComponent();
+#if DEBUG
+            this.AttachDevTools();
+#endif
         }
 
         private void onGenerateReceipt(int position)
@@ -65,8 +64,8 @@ namespace gestionHotel.IU.gestionReservas
             if (position != -1)
             {
 
-                string texto = this.listaReservas[position].GetFactura;
-                this.showReceipt(texto,this.listaReservas[position].IdReserva);
+                string texto = this.rg.R[position].GetFactura;
+                this.showReceipt(texto,this.rg.R[position].IdReserva);
 
             }
             else
@@ -96,7 +95,7 @@ namespace gestionHotel.IU.gestionReservas
                     await dialog.ShowDialog(this);
                     if (!dialog.IsCancelled)
                     {
-                        this.listaReservas.RemoveAt(position);
+                        this.rg.R.RemoveAt(position);
                     }
                     
                 }
@@ -119,7 +118,7 @@ namespace gestionHotel.IU.gestionReservas
             if (position != -1)
             {
                 
-                new InsertarReserva(this.listaReservas,position,this.c,this.h).ShowDialog(this);
+                new InsertarReserva(this.rg.R,position,this.rg.C,this.rg.H).ShowDialog(this);
             }
             else
             {
@@ -129,26 +128,26 @@ namespace gestionHotel.IU.gestionReservas
 
         private void OnInsert()
         { 
-            new InsertarReserva(this.listaReservas,this.c,this.h).ShowDialog(this);
+            new InsertarReserva(this.rg.R,this.rg.C,this.rg.H).ShowDialog(this);
             //new InsertarReserva(this.listaReservas,this.c,this.h).ShowDialog(this);
         }
         
         private void OnSave(string nf)
         {
-            XmlRegistroReservas toXml = new XmlRegistroReservas(this.listaReservas);
+            XmlRegistroReservas toXml = new XmlRegistroReservas(this.rg.R);
             toXml.Guardar(nf);
         }
         
         private RegistroReservas OnLoad(string nf)
         {
             //NECESITA REFERENCIA A LISTA DE CLIENTES Y DE HABITACIONES
-            return XmlRegistroReservas.RecuperarXML(nf,this.h,this.c); //toXml = new XmlRegistroReservas(this.listaReservas);
+            return XmlRegistroReservas.RecuperarXML(nf,this.rg.H,this.rg.C); //toXml = new XmlRegistroReservas(this.listaReservas);
             
         }
         private void OnUpdateCount()
         {
             var count = this.FindControl<Label>("LbNumReservas");
-            count.Content=this.listaReservas.Length.ToString();
+            count.Content=this.rg.R.Length.ToString();
         }
         private void InitializeComponent()
         {

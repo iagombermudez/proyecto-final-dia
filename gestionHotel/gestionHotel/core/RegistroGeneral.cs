@@ -10,7 +10,8 @@ namespace gestionHotel.core
     {
         private RegistroReservas r;
         private RegistroHabitaciones h;
-
+        private RegistroClientes c;
+        //añadir clientes
 
         public RegistroGeneral(RegistroHabitaciones h)
         {
@@ -35,6 +36,11 @@ namespace gestionHotel.core
         public RegistroHabitaciones H
         {
             get => h;
+        }
+
+        public RegistroClientes C
+        {
+            get => c;
         }
     }
 }
