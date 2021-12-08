@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net5.0</TargetFramework>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="0.10.3" />
+        <PackageReference Include="Avalonia.Desktop" Version="0.10.3" />
+        <PackageReference Include="Avalonia.Diagnostics" Version="0.10.3" />
+    </ItemGroup>
+    <ItemGroup>
+      <Compile Update="IU\MainWindow.axaml.cs">
+        <DependentUpon>MainWindow.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="IU\App.axaml.cs">
+        <DependentUpon>App.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="IU\gestionReservas\InsertarReserva.axaml.cs">
+        <DependentUpon>App.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="IU\GeneralMessage.axaml.cs">
+        <DependentUpon>GeneralMessage.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="IU\gestionHabitaciones\InsertarHabitacion.axaml.cs">
+        <DependentUpon>InsertarReserva.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="IU\gestionHabitaciones\GestionHabitaciones.cs">
+        <DependentUpon>GestionHabitaciones.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="IU\gestionReservas\MenuReservas.axaml.cs">
+        <DependentUpon>MenuReservas.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="IU\gestionReservas\VisualizacionFactura.axaml.cs">
+        <DependentUpon>VisualizacionFactura.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="IU\gestionHabitaciones\ModificarHabitacion.axaml.cs">
+        <DependentUpon>ModificarHabitacion.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
+    <ItemGroup>
+      <UpToDateCheckInput Remove="gestionReservas\InsertarReserva.axaml" />
+    </ItemGroup>
+</Project>
