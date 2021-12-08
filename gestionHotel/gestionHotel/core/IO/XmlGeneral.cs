@@ -40,7 +40,7 @@ namespace gestionHotel.core.IO
                 RegistroClientes regC = RegistroClientes.FromXml(root.Element(RegistroClientes.EtqClientes));
                 RegistroReservas regR = XmlRegistroReservas.cargarXML(root.Element(XmlRegistroReservas.TAG_ROOT),regH,regC);
                 
-                toret = new RegistroGeneral(regH, regC);
+                toret = new RegistroGeneral(regH, regC,regR);
             }
             
             return toret;
@@ -59,11 +59,11 @@ namespace gestionHotel.core.IO
             XmlRegistroHabitaciones xmlH = new XmlRegistroHabitaciones(this.rg.H);
             
             toret.Add(xmlH.ToXML());
-            
+
             toret.Add(rg.C.ToXml());
             
-           // XmlRegistroReservas xmlR = new XmlRegistroReservas(this.rg.R);
-            //toret.Add(xmlR.ToXML());
+            XmlRegistroReservas xmlR = new XmlRegistroReservas(this.rg.R);
+            toret.Add(xmlR.ToXML());
                         
             return toret;
         }

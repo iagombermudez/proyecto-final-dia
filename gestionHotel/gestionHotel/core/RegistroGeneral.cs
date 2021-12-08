@@ -13,10 +13,11 @@ namespace gestionHotel.core
         private RegistroClientes c;
         //añadir clientes
 
-        public RegistroGeneral(RegistroHabitaciones h, RegistroClientes c)
+        public RegistroGeneral(RegistroHabitaciones h, RegistroClientes c,RegistroReservas r)
         {
             this.h = h;
             this.c = c;
+            this.r = r;
 
         }
         public RegistroGeneral()
