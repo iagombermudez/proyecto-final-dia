@@ -18,11 +18,11 @@ namespace gestionHotel.IU.gestionClientes {
             var btOk = this.FindControl<Button>( "BtOk" );
             var btCancel = this.FindControl<Button>( "BtCancel" );
             
-            btOk.Click += (_, _) => this.OnExit();
-            btCancel.Click += (_, _) => this.OnCancelClicked();
-            this.Closed += (_, _) => this.OnCancelClicked();
+            btOk.Click += (_, _) => this.OnOk();
+            btCancel.Click += (_, _) => this.OnExit();
+            this.Closed += (_, _) => this.OnExit();
             
-            this.IsCancelled = false;
+            this.IsCancelled = true;
         }
 
         void InitializeComponent()
@@ -31,9 +31,9 @@ namespace gestionHotel.IU.gestionClientes {
             AvaloniaXamlLoader.Load(this);
         }
 
-        void OnCancelClicked()
+        void OnOk()
         {
-            this.IsCancelled = true;
+            this.IsCancelled = false;
             this.OnExit();
         }
 

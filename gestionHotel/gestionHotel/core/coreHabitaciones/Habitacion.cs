@@ -84,12 +84,9 @@ namespace gestionHotel.core.coreHabitaciones
             set;
         }
 
-        public string ToString()
+        public override string ToString()
         {
-            return "Información de la habitacion" +
-                   "\n " + Id + "\n" + Piso + "\n" + Tipo + "\n" + FechaRenovacion
-                   + "\n" + FechaReserva + "\n Wifi: " + Wifi + "\n Caja Fuerte: " + CajaFuerte
-                   + "\n Mini-bar: " + MiniBar + "\n Baño: " + Bano + "\n Cocina: " + Cocina + "\n TV: " + Tv;
+            return Id.ToString();
         }
     }
 }

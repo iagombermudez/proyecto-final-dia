@@ -4,7 +4,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="gestionHotel.IU.gestionHabitaciones.GestionHabitaciones"
-        Title="Gestion habitaciones">
+        Title="Gestion habitaciones"
+        MinWidth="1300"
+        MinHeight="600"
+        Width="1300"
+        Height="600">
     
         <StackPanel Margin="7"
                     HorizontalAlignment="Stretch"
@@ -22,9 +26,10 @@
                 
                 <DockPanel Margin="5" HorizontalAlignment="Left">
                                
-                        <Button Background="LightBlue" Margin="5" Content="Insertar" Name="OpInsert"></Button>
-                        <Button Background="LightBlue" Margin="5" Content="Modificar" Name="btModificar"></Button>
-                        <Button Background="LightBlue" Margin="5" Content="Eliminar" Name="btEliminar"></Button>
+                        <Button Margin="5" Content="Insertar" Name="OpInsert"></Button>
+                        <Button Margin="5" Content="Modificar" Name="btModificar"></Button>
+                        <Button Margin="5" Content="Eliminar" Name="btEliminar"></Button>
+                        <Button Margin="5" Content="Reservar" Name="BtRes"></Button>
                                 
                 </DockPanel>
                 

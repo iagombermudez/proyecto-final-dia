@@ -24,19 +24,15 @@
                                         <MenuItem Header="Guardar" Name="OpGuardar" />
                                         <MenuItem Header="Salir" Name="OpExit" />
                                 </MenuItem>
-                                <MenuItem Header="Editar">
-                                        <MenuItem Header="Insertar" Name="OpInsert" />
-                                </MenuItem>
+
                         </Menu>
                 
                 <DockPanel Margin="5">
                         
-                        <Button Margin="5" Content="Generar factura" Name="btFactura"></Button>
-                       
+                        <Button Margin="5" Content="Insertar" Name="OpInsert"></Button>
                         <Button Margin="5" Content="Modificar" Name="btModificar"></Button>
-                                                                       
-                                                                
                         <Button Margin="5" Content="Eliminar" Name="btEliminar"></Button>
+                        <Button Margin="5" Content="Generar factura" Name="btFactura"></Button>
                                                                         
                 </DockPanel>
                 
@@ -55,6 +51,8 @@
                                                           IsReadOnly="True"
                                                           SelectionMode="Single"
                                                           AlternatingRowBackground="LightBlue"
+                                                          VerticalAlignment="Stretch"
+                                                          HorizontalAlignment="Stretch"
                                                           MinHeight="250">
                                     
                                     

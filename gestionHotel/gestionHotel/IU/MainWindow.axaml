@@ -8,80 +8,69 @@
     <StackPanel Margin="7"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch">
-                        
-                        
-                        <Label Margin="5" Content="Bienvenido"></Label>
-                        <Menu
-                                VerticalAlignment="Top">
-                    
-                                <MenuItem Header="Archivo">
-                                        <MenuItem Header="Guardar" Name="OpGuardar" />
-                                        <MenuItem Header="Salir" Name="OpExit" />
-                                </MenuItem>
-                                <MenuItem Header="Reservas">
-                                        <MenuItem Header="Ver reservas" Name="OpVerReservas" />
-                                       
-                                </MenuItem>
-                                <MenuItem Header="Habitaciones" Name="OpHabitaciones">
-                                        
-                                       
-                                </MenuItem>
-                                <MenuItem Header="Clientes" Name="OpClientes">
-                                        
-                                       
-                                </MenuItem>
-                                <MenuItem Header="Graficos">
-                                        
-                                </MenuItem>
-                                
-                               
-                        </Menu>
+            
+        <Label Margin="5" Content="Bienvenido"></Label>
+        
+        <Menu
+            VerticalAlignment="Top">
+
+            <MenuItem Header="Archivo">
+                    <MenuItem Header="Guardar" Name="OpGuardar" />
+                    <MenuItem Header="Salir" Name="OpExit" />
+            </MenuItem>
+            
+            <MenuItem Header="Reservas" Name="OpVerReservas"/>
+            <MenuItem Header="Habitaciones" Name="OpHabitaciones"/>
+            <MenuItem Header="Clientes" Name="OpClientes"/>
+            <MenuItem Header="Graficos"/>
+            
+        </Menu>
                 
-                        <DockPanel
-                                Margin="5"
-                                VerticalAlignment="Stretch">
+        <DockPanel
+                Margin="5"
+                VerticalAlignment="Stretch">
+
+                <Border    Margin="5"
+                           BorderThickness="1"
+                           CornerRadius="3"
+                           BorderBrush="Black">
+                         <Grid>
+                                  
+                                  
+                                  <DataGrid Name="DtHabitacionesLibres"
+                                            Margin="5"
+                                            AutoGenerateColumns="False"
+                                            IsReadOnly="True"
+                                            SelectionMode="Single"
+                                            AlternatingRowBackground="LightBlue"
+                                            VerticalAlignment="Stretch"
+                                            HorizontalAlignment="Stretch"
+                                            MinHeight="250">
+                     
+                                       
+                                        
+                                        
+                                        <DataGrid.Columns>
+                                                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                                                <DataGridTextColumn Header="Piso" Binding="{Binding Piso}" />
+                                                <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}" />
+                                                <DataGridTextColumn Header="Fecha última renovación" Binding="{Binding FechaRenovacion}" />
+                                                <DataGridTextColumn Header="Fecha de última reserva" Binding="{Binding FechaReserva}" />
+                                                <DataGridTextColumn Header="Wifi" Binding="{Binding Wifi}" />
+                                                <DataGridTextColumn Header="Caja Fuerte" Binding="{Binding CajaFuerte}" />
+                                                <DataGridTextColumn Header="Mini Bar" Binding="{Binding MiniBar}" />
+                                                <DataGridTextColumn Header="Baño" Binding="{Binding Bano}" />
+                                                <DataGridTextColumn Header="Cocina" Binding="{Binding Cocina}" />
+                                                <DataGridTextColumn Header="TV" Binding="{Binding Tv}" />
+                                        </DataGrid.Columns>
+                                        
+                                  </DataGrid>
+                                  
+                          </Grid>
+                </Border>
                 
-                                <Border    Margin="5"
-                                           BorderThickness="1"
-                                           CornerRadius="3"
-                                           BorderBrush="Black">
-                                         <Grid>
-                                                  
-                                                  
-                                                  <DataGrid Name="DtHabitacionesLibres"
-                                                            Margin="5"
-                                                            AutoGenerateColumns="False"
-                                                            IsReadOnly="True"
-                                                            SelectionMode="Single"
-                                                            AlternatingRowBackground="LightBlue"
-                                                            VerticalAlignment="Stretch"
-                                                            HorizontalAlignment="Stretch"
-                                                            MinHeight="250">
-                                     
-                                                       
-                                                        
-                                                        
-                                                        <DataGrid.Columns>
-                                                                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
-                                                                <DataGridTextColumn Header="Piso" Binding="{Binding Piso}" />
-                                                                <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}" />
-                                                                <DataGridTextColumn Header="Fecha última renovación" Binding="{Binding FechaRenovacion}" />
-                                                                <DataGridTextColumn Header="Fecha de última reserva" Binding="{Binding FechaReserva}" />
-                                                                <DataGridTextColumn Header="Wifi" Binding="{Binding Wifi}" />
-                                                                <DataGridTextColumn Header="Caja Fuerte" Binding="{Binding CajaFuerte}" />
-                                                                <DataGridTextColumn Header="Mini Bar" Binding="{Binding MiniBar}" />
-                                                                <DataGridTextColumn Header="Baño" Binding="{Binding Bano}" />
-                                                                <DataGridTextColumn Header="Cocina" Binding="{Binding Cocina}" />
-                                                                <DataGridTextColumn Header="TV" Binding="{Binding Tv}" />
-                                                        </DataGrid.Columns>
-                                                        
-                                                  </DataGrid>
-                                                  
-                                          </Grid>
-                                </Border>
-                                
-                    
-                        </DockPanel>
+    
+        </DockPanel>
           
                         
                 

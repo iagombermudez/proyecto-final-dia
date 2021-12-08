@@ -40,56 +40,48 @@ namespace gestionHotel.core.coreClientes
             return toret.ToString();
         }
         
-        public void GuardaXml()
-        {
-            this.GuardaXml( ArchivoXml );
-        }
         
-        public void GuardaXml(string nf)
+        public XElement ToXml()
         {
-            var root = new XElement( EtqClientes );
+            var toret = new XElement( EtqClientes );
             
             foreach(Cliente cliente in this) {
-                root.Add( cliente.ToXml() );
+                toret.Add( cliente.ToXml() );
             }
-            
-            root.Save( nf );
-        }
-        
-		public static RegistroClientes RecuperaXml(string f)
-		{
-			var toret = new RegistroClientes();
-            
-            try {
-                
-                var doc = XDocument.Load( f );
-                
-                var listaClientes = doc.Element( EtqClientes )
-                    ?.Elements( EtqCliente );
 
-                new List<XElement>(listaClientes!).ForEach(
-                    node => toret.Add(Cliente.FromXml(node)));
-
-            }
-            catch(XmlException)
-            {
-                toret.Clear();
-            }
-            catch(IOException)
-            {
-                toret.Clear();
-            }
-            
             return toret;
         }
+        
+        
+        public static RegistroClientes FromXml(XElement root)
+        {
+            string rootTag = root?.Name.ToString() ?? "";
+            var toret = new RegistroClientes();
 
+            if (root != null && rootTag == EtqClientes)
+            {
+                try
+                {
+                    var listaClientes = root.Elements(EtqCliente);
+
+                    new List<XElement>(listaClientes!).ForEach(
+                        node => toret.Add(Cliente.FromXml(node)));
+                }
+                catch (XmlException)
+                {
+                    toret.Clear();
+                }
+                catch (IOException)
+                {
+                    toret.Clear();
+                }
+                
+            }
+
+            return toret;
+            
+        }
         
-		public static RegistroClientes RecuperaXml()
-		{
-			return RecuperaXml( ArchivoXml );
-		}
-        
-        public const string ArchivoXml = "RegistroClientes.xml";
         public const string EtqClientes = "Clientes";
         public const string EtqCliente = "Cliente";
 

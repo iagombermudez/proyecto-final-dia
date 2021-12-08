@@ -10,6 +10,7 @@ using gestionHotel.core.coreHabitaciones;
 using gestionHotel.core.IO;
 using gestionHotel.IU;
 using gestionHotel.IU.gestionHabitaciones;
+using gestionHotel.IU.gestionReservas;
 using hotel;
 using hotel.IO;
 
@@ -26,19 +27,26 @@ namespace gestionHotel.IU.gestionHabitaciones
             
             this.registroGeneral = rg;
             
+            var opExit = this.FindControl<MenuItem>( "OpExit" );
             var opInsertar = this.FindControl<Button>("OpInsert");
             var dtHabitaciones = this.FindControl<DataGrid>("DtHabitaciones");
             var opGuardar = this.FindControl<MenuItem>("OpGuardar");
             var opModificar = this.FindControl<Button>("btModificar");
             var opEliminar = this.FindControl<Button>("btEliminar");
+            var btRes = this.FindControl<Button>( "BtRes" );
+            
                 
             //Para que el datagrid se cargue con los datos del txt.
             dtHabitaciones.Items = this.registroGeneral.H;
-            opGuardar.Click += (_, _) => this.OnSave("infoGeneral.xml");
+            opGuardar.Click += (_, _) => this.OnSave();
             opInsertar.Click += (_, _) => this.Insertar();
             opEliminar.Click += (_, _) => this.Eliminar(dtHabitaciones.SelectedIndex);
             opModificar.Click += (_, _) => this.Modificar(dtHabitaciones.SelectedIndex);
-
+            opExit.Click += (_, _) => this.OnExit();
+            btRes.Click += (_, _) => this.OnRes((Habitacion) dtHabitaciones.SelectedItem);
+            
+            this.Closed += (_, _) => this.OnSave();
+            
         }
         public GestionHabitaciones()
         {
@@ -48,11 +56,22 @@ namespace gestionHotel.IU.gestionHabitaciones
 #endif
 
         }
-        private void OnSave(string nf)
+        private void OpSalir()
         {
-            //XmlRegistroHabitaciones toXml = new XmlRegistroHabitaciones(this.registroGeneral.H);
-            XmlGeneral toXml = new XmlGeneral(this.registroGeneral);
-            toXml.GuardarInfoGeneral(nf);
+            this.OnSave();
+            this.Close();
+        }
+        
+        void OnSave()
+        {
+            new XmlGeneral(registroGeneral).GuardarInfoGeneral("infoGeneral.xml");
+        }
+        
+
+        void OnExit()
+        {
+            new XmlGeneral(registroGeneral).GuardarInfoGeneral("infoGeneral.xml");
+            this.Close();
         }
         
         private async void Insertar() { await new InsertarHabitacion(this.registroGeneral.H).ShowDialog(this); }
@@ -71,13 +90,13 @@ namespace gestionHotel.IU.gestionHabitaciones
                     throw;
                 }
             }
-            else  { new GeneralMessage("No se ha seleccionado una fila",false).Show(); }
+            else  { new GeneralMessage("Debes seleccionar una fila antes",false).Show(); }
         }
 
         private void Modificar(int position)
         {
             if (position != -1) { new InsertarHabitacion(this.registroGeneral.H,this.registroGeneral.H[position]).ShowDialog(this); }
-            else { new GeneralMessage("No se ha seleccionado una fila",false).Show(); }
+            else { new GeneralMessage("Debes seleccionar una fila antes",false).Show(); }
         }
 
         private RegistroHabitaciones OnLoad(string nf) {  return XmlRegistroHabitaciones.RecuperarXML(nf); }
@@ -91,6 +110,21 @@ namespace gestionHotel.IU.gestionHabitaciones
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
+        }
+        
+        async void OnRes(Habitacion habitacion)
+        {
+            if (habitacion == null)
+            {
+                new GeneralMessage("No se ha seleccionado una fila",false).Show();
+            }
+            else
+            {
+
+                await new InsertarReserva(this.registroGeneral.R,this.registroGeneral.C, habitacion).ShowDialog(this);
+                
+            }
+            
         }
     }
 }

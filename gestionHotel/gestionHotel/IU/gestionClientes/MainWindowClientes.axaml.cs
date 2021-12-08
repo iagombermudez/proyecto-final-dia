@@ -1,42 +1,52 @@
+using System;
 using gestionHotel.core.coreClientes;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using gestionHotel.core;
+using gestionHotel.core.IO;
+using gestionHotel.IU.gestionReservas;
 
 namespace gestionHotel.IU.gestionClientes
 {
     public class MainWindowClientes : Window
     {
+        private RegistroGeneral registroGeneral;
+        private RegistroClientes registroClientes;
+        
         public MainWindowClientes()
         {
             InitializeComponent();
 #if DEBUG
             this.AttachDevTools();
 #endif
+
+        }
+        
+        public MainWindowClientes(RegistroGeneral rg):this()
+        {
+            this.registroGeneral = rg;
+            this.registroClientes = registroGeneral.C;
+
             var opExit = this.FindControl<MenuItem>( "OpExit" );
             var opSave = this.FindControl<MenuItem>( "OpGuardar" );
-            var opInsert = this.FindControl<MenuItem>( "OpInsert" );
             var btInsert = this.FindControl<Button>( "BtInsert" );
-            var opDel = this.FindControl<MenuItem>( "OpDel" );
             var btDel = this.FindControl<Button>( "BtDel" );
-            var opMod = this.FindControl<MenuItem>( "OpMod" );
             var btMod = this.FindControl<Button>( "BtMod" );
+            var btRes = this.FindControl<Button>( "BtRes" );
             var dtClientes = this.FindControl<DataGrid>( "DtClientes" );
 
             opExit.Click += (_, _) => this.OnExit();
             opSave.Click += (_, _) => this.OnSave();
             btInsert.Click += (_, _) => this.OnInsert(); 
-            opInsert.Click += (_, _) => this.OnInsert();
             btDel.Click += (_, _) => this.OnDel((Cliente) dtClientes.SelectedItem);
-            opDel.Click += (_, _) => this.OnDel((Cliente) dtClientes.SelectedItem);
             btMod.Click += (_, _) => this.OnMod((Cliente) dtClientes.SelectedItem);
-            opMod.Click += (_, _) => this.OnMod((Cliente) dtClientes.SelectedItem);
+            btRes.Click += (_, _) => this.OnRes((Cliente) dtClientes.SelectedItem);
             
             this.Closed += (_, _) => this.OnSave();
-
-            this.RegistroClientes = RegistroClientes.RecuperaXml();
-            dtClientes.Items = this.RegistroClientes;
             
+            dtClientes.Items = this.registroClientes;
+
         }
 
         void InitializeComponent()
@@ -45,16 +55,16 @@ namespace gestionHotel.IU.gestionClientes
             AvaloniaXamlLoader.Load(this);
         }
         
+        
         void OnSave()
         {
-            this.RegistroClientes.GuardaXml();
+            new XmlGeneral(registroGeneral).GuardarInfoGeneral("infoGeneral.xml");
         }
         
 
-
         void OnExit()
         {
-            this.OnSave();
+            new XmlGeneral(registroGeneral).GuardarInfoGeneral("infoGeneral.xml");
             this.Close();
         }
         
@@ -64,13 +74,14 @@ namespace gestionHotel.IU.gestionClientes
             var insertView = new InsertViewClientes();
             await insertView.ShowDialog( this );
 
-            if ( !insertView.IsCancelled ) {
-
-                if (!this.RegistroClientes.ExisteDni(insertView.Dni))
+            if (!insertView.IsCancelled )
+            {
+                if (!this.registroClientes.ExisteDni(insertView.Dni))
                 {
-                    this.RegistroClientes.Add(
+                    this.registroClientes.Add(
                         new Cliente(insertView.Dni, insertView.Nombre, insertView.Telefono,
                             insertView.Email, insertView.Direccion));
+                    
                 }
                 else
                 {
@@ -79,7 +90,7 @@ namespace gestionHotel.IU.gestionClientes
                     
                     if (!confirmar.IsCancelled)
                     {
-                        OnMod(RegistroClientes.BuscarPorDni(insertView.Dni));
+                        OnMod(this.registroClientes.BuscarPorDni(insertView.Dni));
                     }
                     
                 }
@@ -92,7 +103,7 @@ namespace gestionHotel.IU.gestionClientes
 
             if (cliente == null)
             {
-                new GeneralMessage("No se ha seleccionado una fila",false).Show();
+                new GeneralMessage("Debes seleccionar una fila antes",false).Show();
             }
             else
             {
@@ -101,7 +112,7 @@ namespace gestionHotel.IU.gestionClientes
 
                 if (!confirmar.IsCancelled)
                 {
-                    RegistroClientes.Remove(cliente);
+                    this.registroClientes.Remove(cliente);
                 }
             }
             
@@ -111,7 +122,7 @@ namespace gestionHotel.IU.gestionClientes
         {
             if (cliente == null)
             {
-                new GeneralMessage("No se ha seleccionado una fila",false).Show();
+                new GeneralMessage("Debes seleccionar una fila antes",false).Show();
             }
             else
             {
@@ -122,10 +133,10 @@ namespace gestionHotel.IU.gestionClientes
                 if (!modifyView.IsCancelled)
                 {
 
-                    this.RegistroClientes.Add(
+                    this.registroClientes.Add(
                         new Cliente(cliente.Dni, modifyView.Nombre, modifyView.Telefono,
                             modifyView.Email, modifyView.Direccion));
-                    this.RegistroClientes.Remove(cliente);
+                    this.registroClientes.Remove(cliente);
 
 
                 }
@@ -134,9 +145,21 @@ namespace gestionHotel.IU.gestionClientes
 
             
         }
-        
-        public RegistroClientes RegistroClientes {
-            get;
+        async void OnRes(Cliente cliente)
+        {
+            if (cliente == null)
+            {
+                new GeneralMessage("Debes seleccionar una fila antes",false).Show();
+            }
+            else
+            {
+
+                await new InsertarReserva(this.registroGeneral.R,this.registroGeneral.H, cliente).ShowDialog(this);
+                
+            }
+            
         }
+        
+       
     }
 }

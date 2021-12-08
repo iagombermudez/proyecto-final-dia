@@ -4,82 +4,85 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="gestionHotel.IU.gestionClientes.MainWindowClientes"
-        Title="Gestión de clientes">
+        Title="Gestión de clientes"
+        MinWidth="1300"
+        MinHeight="600"
+        Width="1300"
+        Height="600">
+        
     
-    <DockPanel
-        HorizontalAlignment="Stretch"
-        VerticalAlignment="Stretch">
-        
-        <Menu
-            DockPanel.Dock="Top"
-            VerticalAlignment="Top">
-            
-            <MenuItem Header="Archivo">
-                <MenuItem Header="Guardar" Name="OpGuardar" />
-                <MenuItem Header="Salir" Name="OpExit" />
-            </MenuItem>
-            <MenuItem Header="_Editar">
-                <MenuItem Header="_Insertar" Name="OpInsert" />
-                <MenuItem Header="_Modificar" Name="OpMod" />
-                <MenuItem Header="_Eliminar" Name="OpDel" />
-                >
-            </MenuItem>
-        </Menu>
-        
-        <Label
-            DockPanel.Dock="Bottom"
-            Name="LblDesc"
-            Margin="5"
-            VerticalAlignment="Bottom"
-            HorizontalAlignment="Stretch" />
-        
-        <DockPanel
-            Margin="5"
-            VerticalAlignment="Stretch">
-            
-            <StackPanel DockPanel.Dock="Right"
-                        Margin="5"
-                        Orientation="Vertical"
-                        VerticalAlignment="Stretch"
-                        HorizontalAlignment="Right">
+        <StackPanel Margin="7"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch">
+                        
+                        
+                        <Label Margin="5" Content="Bienvenido"></Label>
+                        <Menu
+                                VerticalAlignment="Top">
+                            <MenuItem Header="Archivo">
+                                <MenuItem Header="Guardar" Name="OpGuardar" />
+                                <MenuItem Header="Salir" Name="OpExit" />
+                            </MenuItem>
                             
-                <Button Name="BtInsert"
-                        Margin="5"
-                        Content="Insertar" />
-                <Button Name="BtMod"
-                        Margin="5"
-                        Content="Modificar" />
-                <Button Name="BtDel"
-                        Margin="5"
-                        Content="Eliminar" />
+                        </Menu>
                 
-            </StackPanel>
-        
-            <Border    Margin="5"
-                       BorderThickness="1"
-                       CornerRadius="3"
-                       BorderBrush="Black">
+                <DockPanel Margin="5">
+                    <Button Name="BtInsert"
+                            Margin="5"
+                            Content="Insertar" />
+                    <Button Name="BtMod"
+                            Margin="5"
+                            Content="Modificar" />
+                    <Button Name="BtDel"
+                            Margin="5"
+                            Content="Eliminar" />
+                    <Button Name="BtRes"
+                            Margin="5"
+                            Content="Reservar" />
+                    
+                </DockPanel>
+                
+                        <DockPanel
+                                Margin="5"
+                                VerticalAlignment="Stretch">
+                
+                                <Border    Margin="5"
+                                           BorderThickness="1"
+                                           CornerRadius="3"
+                                           BorderBrush="Black">
+                                    
+                                    <Grid>
 
-                <DataGrid Name="DtClientes"
-                          Margin="5"
-                          AutoGenerateColumns="False"
-                          IsReadOnly="True"
-                          SelectionMode="Single"
-                          AlternatingRowBackground="Whitesmoke">
+                                    <DataGrid Name="DtClientes"
+                                              Margin="5"
+                                              AutoGenerateColumns="False"
+                                              IsReadOnly="True"
+                                              SelectionMode="Single"
+                                              AlternatingRowBackground="LightBlue"
+                                              VerticalAlignment="Stretch"
+                                              HorizontalAlignment="Stretch"
+                                              MinHeight="250">
 
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Dni" Binding="{Binding Dni}" />
-                        <DataGridTextColumn Header="Nombre"  Binding="{Binding Nombre}" />
-                        <DataGridTextColumn Header="Telefono"  Binding="{Binding Telefono}" />
-                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
-                        <DataGridTextColumn Header="Direccion Postal" Binding="{Binding Direccion}" />
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Dni" Binding="{Binding Dni}" />
+                                            <DataGridTextColumn Header="Nombre"  Binding="{Binding Nombre}" />
+                                            <DataGridTextColumn Header="Telefono"  Binding="{Binding Telefono}" />
+                                            <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
+                                            <DataGridTextColumn Header="Direccion Postal" Binding="{Binding Direccion}" />
 
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Border>
-            
-        </DockPanel>
-        
-    </DockPanel>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                        
+                                        </Grid>
+                                </Border>
+                                
+                    
+                        </DockPanel>
+                
+                        
+
+                        
+                
+                </StackPanel> 
 </Window>
 

@@ -10,6 +10,7 @@ using gestionHotel.core.coreClientes;
 using gestionHotel.core.coreHabitaciones;
 using gestionHotel.core.coreReservas;
 using gestionHotel.core.coreReservas.IO;
+using gestionHotel.core.IO;
 
 namespace gestionHotel.IU.gestionReservas
 {
@@ -26,14 +27,8 @@ namespace gestionHotel.IU.gestionReservas
             
             this.rg=rg;
             
-            //List<Cliente> clientes = new List<Cliente>();
-            //List<Habitacion> habitacions = new List<Habitacion>();
-            RegistroClientes clientes = new RegistroClientes();
-            RegistroHabitaciones habitaciones = new RegistroHabitaciones();
-                
-
             
-            var opInsertar = this.FindControl<MenuItem>("OpInsert");
+            var opInsertar = this.FindControl<Button>("OpInsert");
             var dtReservas = this.FindControl<DataGrid>("DtReservas");
             var opGuardar = this.FindControl<MenuItem>("OpGuardar");
             var opModificar = this.FindControl<Button>("btModificar");
@@ -43,12 +38,14 @@ namespace gestionHotel.IU.gestionReservas
                 
             dtReservas.Items = this.rg.R;
                 
-            opGuardar.Click += (_, _) => this.OnSave("reservas.txt");
+            opGuardar.Click += (_, _) => this.OnSave();
             opInsertar.Click += (_, _) => this.OnInsert();
             opEliminar.Click += (_, _) => this.OnDelete(dtReservas.SelectedIndex);
             opModificar.Click += (_, _) => this.OnModify(dtReservas.SelectedIndex);
             opFactura.Click += (_, _) => this.onGenerateReceipt(dtReservas.SelectedIndex);
             opSalir.Click += (_, _) => this.OnExit();
+            
+            this.Closed += (_, _) => this.OnSave();
             
         }
         public MenuReservas()
@@ -79,11 +76,7 @@ namespace gestionHotel.IU.gestionReservas
             VisualizacionFactura dialog = new VisualizacionFactura(texto,id);
             dialog.ShowDialog(this);
         }
-
-        private void OnExit()
-        {
-            this.Close();
-        }
+        
 
         private async void OnDelete(int position)
         {
@@ -132,11 +125,17 @@ namespace gestionHotel.IU.gestionReservas
             //new InsertarReserva(this.listaReservas,this.c,this.h).ShowDialog(this);
         }
         
-        private void OnSave(string nf)
+        private void OnExit()
         {
-            XmlRegistroReservas toXml = new XmlRegistroReservas(this.rg.R);
-            toXml.Guardar(nf);
+            this.OnSave();
+            this.Close();
         }
+        
+        void OnSave()
+        {
+            new XmlGeneral(rg).GuardarInfoGeneral("infoGeneral.xml");
+        }
+
         
         private RegistroReservas OnLoad(string nf)
         {

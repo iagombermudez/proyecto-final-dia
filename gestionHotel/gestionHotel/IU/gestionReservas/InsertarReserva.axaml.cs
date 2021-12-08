@@ -22,18 +22,25 @@ namespace gestionHotel.IU.gestionReservas
         private RegistroHabitaciones _habitaciones;
         //private Reserva r;
         private int position;
-        public InsertarReserva(RegistroReservas reservas,RegistroClientes clientes, RegistroHabitaciones habitaciones,Cliente cliente, Habitacion habitacion):this()
+        public InsertarReserva(RegistroReservas reservas, RegistroHabitaciones habitaciones,Cliente cliente):this()
         {
             this.position = -1;
             this.reservas = reservas;
             this._cliente = cliente;
-            this._habitacion = habitacion;
-            this._clientes = clientes;
             this._habitaciones = habitaciones;
             this.renderTemplate();
             this.drawButton("Insertar"); 
         }
         
+        public InsertarReserva(RegistroReservas reservas,RegistroClientes clientes,Habitacion habitacion):this()
+        {
+            this.position = -1;
+            this.reservas = reservas;
+            this._clientes = clientes;
+            this._habitacion = habitacion;
+            this.renderTemplate();
+            this.drawButton("Insertar"); 
+        }
         public InsertarReserva(RegistroReservas reservas, RegistroClientes clientes, RegistroHabitaciones habitaciones):this()
         {
             this.position = -1;
@@ -304,6 +311,7 @@ namespace gestionHotel.IU.gestionReservas
 
                 if (this.CheckNumberInteger(iva.Text) && this.CheckNumberDouble(precioDia.Text))
                 {
+                    
                     Reserva toAdd = new Reserva(cliente,habitacion,fEntrada,fSalida,Int32.Parse(iva.Text),hayGaraje,Double.Parse(precioDia.Text),tipo.Text );
 
                     this.reservas.AddReserva(toAdd);

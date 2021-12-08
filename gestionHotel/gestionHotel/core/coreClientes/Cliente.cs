@@ -43,15 +43,7 @@ namespace gestionHotel.core.coreClientes
 
         public override string ToString()
         {
-            StringBuilder toret = new StringBuilder();
-
-            toret.AppendLine("DNI: " + Dni);
-            toret.AppendLine("Nombre: " + Nombre);
-            toret.AppendLine("Telefono: " + Telefono);
-            toret.AppendLine("Email: " + Email);
-            toret.AppendLine("Direccion Postal: " + Direccion);
-
-            return toret.ToString();
+            return Dni.ToString();
         }
 
         public XElement ToXml()

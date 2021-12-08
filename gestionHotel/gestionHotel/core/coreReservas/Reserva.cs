@@ -100,5 +100,7 @@ namespace gestionHotel.core.coreReservas
             double sinIVA = numDias * this.PrecioPorDia;
             return sinIVA + (sinIVA * this.IVA/100);
         }
+        
+        
     }
 }

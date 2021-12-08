@@ -34,6 +34,8 @@ namespace gestionHotel.IU
 
             var opSalir = this.FindControl<MenuItem>("OpExit");
             opSalir.Click += (_, _) => this.OpSalir();
+            
+            this.Closed += (_, _) => this.OpSalir();
 
             
             try
@@ -53,12 +55,18 @@ namespace gestionHotel.IU
 
         private void OpSalir()
         {
+            this.OnSave();
             this.Close();
         }
-
+        
+        void OnSave()
+        {
+            new XmlGeneral(rg).GuardarInfoGeneral("infoGeneral.xml");
+        }
+        
         private async void OpVerReservas()
         {
-            await new MenuReservas().ShowDialog(this);
+            await new MenuReservas(this.rg).ShowDialog(this);
         }
 
         private async void OpenHabitaciones()
@@ -67,7 +75,7 @@ namespace gestionHotel.IU
         }
         private async void OpenClientes()
         {
-            await new MainWindowClientes().ShowDialog(this);
+            await new MainWindowClientes(this.rg).ShowDialog(this);
         }
 
         private void InitializeComponent()
@@ -75,8 +83,5 @@ namespace gestionHotel.IU
             AvaloniaXamlLoader.Load(this);
         }
         
-        public RegistroClientes RegistroClientes {
-            get;
-        }
     }
 }

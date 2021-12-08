@@ -21,8 +21,7 @@ namespace gestionHotel.IU.gestionClientes {
 
         public ModifyViewClientes(Cliente cliente):this()
         {
-            this.IsCancelled = false;
-            
+
             this.FindControl<TextBox>("EdDni").Text = cliente.Dni;
             this.FindControl<TextBox>("EdNom").Text = cliente.Nombre;
             this.FindControl<TextBox>("EdTelf").Text = cliente.Telefono.ToString();
@@ -32,22 +31,17 @@ namespace gestionHotel.IU.gestionClientes {
             var btOk = this.FindControl<Button>( "BtOk" );
             var btCancel = this.FindControl<Button>( "BtCancel" );
             
-            btOk.Click += (_, _) => this.OnExit();
-            btCancel.Click += (_, _) => this.OnCancelClicked();
+            btOk.Click += (_, _) => this.OnOk();
+            btCancel.Click += (_, _) => this.OnExit();
+            this.Closed += (_, _) => this.OnExit();
             
-            this.Closed += (_, _) => this.OnCancelClicked();
-            
-        }
-
-        void InitializeComponent()
-        {
-            this.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            AvaloniaXamlLoader.Load(this);
-        }
-
-        void OnCancelClicked()
-        {
             this.IsCancelled = true;
+        }
+
+        
+        void OnOk()
+        {
+            this.IsCancelled = false;
             this.OnExit();
         }
 
@@ -55,6 +49,13 @@ namespace gestionHotel.IU.gestionClientes {
         {
             this.Close();
         }
+
+        void InitializeComponent()
+        {
+            this.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            AvaloniaXamlLoader.Load(this);
+        }
+        
         
         public string Nombre {
             get => this.FindControl<TextBox>( "EdNom" ).Text.Trim();
