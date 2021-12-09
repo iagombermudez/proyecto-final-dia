@@ -76,13 +76,19 @@ namespace gestionHotel.IU.gestionHabitaciones
         
         private async void Insertar() { await new InsertarHabitacion(this.registroGeneral.H).ShowDialog(this); }
 
-        private void Eliminar(int position)
+        async private void Eliminar(int position)
         {
             if (position != -1)
             {
                 try
                 {
-                    this.registroGeneral.H.RemoveAt(position);
+                    var confirmar = new GeneralMessage("Está seguro de que desea eliminar la habitacion?", true);
+                    await confirmar.ShowDialog( this );
+                    
+                    if (!confirmar.IsCancelled)
+                    {
+                        this.registroGeneral.H.RemoveAt(position);
+                    }
                 }
                 catch (Exception e)
                 {

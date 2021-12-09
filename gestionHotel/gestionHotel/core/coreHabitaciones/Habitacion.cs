@@ -18,6 +18,15 @@ namespace gestionHotel.core.coreHabitaciones
             Tv = tv;
         }
 
+        /// <summary>
+        /// El id corresponde a 3 digitos de los cuales el primero corresponde a la planta
+        /// y los 2 siguientes a la habitación. Al ser un edificio de 3 alturas y 3 habitaciones
+        /// por planta solo puede tener los ids siguientes
+        ///
+        /// 101/102/103
+        /// 201/202/203
+        /// 301/302/303
+        /// </summary>
         public int Id
         {
             get;

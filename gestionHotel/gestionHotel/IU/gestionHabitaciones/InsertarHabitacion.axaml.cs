@@ -8,6 +8,7 @@ using Avalonia.Markup.Xaml;
 using gestionHotel.core;
 using gestionHotel.core.coreHabitaciones;
 using gestionHotel.core.coreReservas;
+using JetBrains.Annotations;
 
 namespace gestionHotel.IU.gestionHabitaciones
 {
@@ -16,24 +17,55 @@ namespace gestionHotel.IU.gestionHabitaciones
         
         private RegistroHabitaciones habitaciones;
         private Habitacion h;
+        List<int> idsLibres = new List<int>();
+      
         public InsertarHabitacion(RegistroHabitaciones habitaciones):this()
         {
+            idsLibres.Add(101);
+            idsLibres.Add(102);
+            idsLibres.Add(103);
+            idsLibres.Add(201);
+            idsLibres.Add(202);
+            idsLibres.Add(203);
+            idsLibres.Add(301);
+            idsLibres.Add(302);
+            idsLibres.Add(303);
+
+            foreach (var h in habitaciones)
+            {
+                if (idsLibres.Contains(h.Id)) idsLibres.Remove(h.Id);
+            }
+            
+            var cbHabitaciones = this.FindControl<ComboBox>("tbId");
+            cbHabitaciones.Items = idsLibres;
+            
             this.habitaciones = habitaciones;
             this.Boton("Insertar"); 
         }
         
         public InsertarHabitacion(RegistroHabitaciones habitaciones, Habitacion h):this()
         {
+
             this.habitaciones = habitaciones;
             this.h = h;
             this.RellenarDatos();
+
+            var dpId = this.FindControl<DockPanel>("dpId");
+            dpId.IsVisible = false;
             
-            var tbId = this.FindControl<TextBox>("tbId");
-            tbId.IsEnabled = false;
+            var dpIdModificacion = this.FindControl<DockPanel>("dpIdModificacion");
+            dpIdModificacion.IsVisible = true;
+            
+            var tbIdModificacion = this.FindControl<TextBox>("tbIdModificacion");
+            tbIdModificacion.Text = h.Id.ToString();
+            
+            
             var dpTypeComboBox = this.FindControl<DockPanel>("dpTypeComboBox");
             dpTypeComboBox.IsVisible = false;
+            
             var dpType = this.FindControl<DockPanel>("dpType");
             dpType.IsVisible = true;
+            
             var tbType = this.FindControl<TextBox>("tbType");
             tbType.Text = h.Tipo;
             
@@ -51,7 +83,7 @@ namespace gestionHotel.IU.gestionHabitaciones
         private void RellenarDatos()
         {
             //Relaciono un componente con una variable.
-            var id = this.FindControl<TextBox>("tbId");
+            var id = this.FindControl<ComboBox>("tbId");
             var tipo= this.FindControl<ComboBox>("cbTipoHabitacion");
             var fechaRenovacion= this.FindControl<DatePicker>("dpFechaRenovacion");
             var fechaReserva= this.FindControl<DatePicker>("dpFechaReserva");
@@ -63,7 +95,7 @@ namespace gestionHotel.IU.gestionHabitaciones
             var tv= this.FindControl<CheckBox>("cbTv");
 
             //Se hace tipo.Text para pasarlo a texto
-            id.Text = this.h.Id.ToString();
+            id.SelectedItem = this.h.Id.ToString();
             tipo.SelectedItem = this.h.Tipo;
             fechaRenovacion.SelectedDate = this.h.FechaRenovacion;
             fechaReserva.SelectedDate = this.h.FechaReserva;
@@ -86,7 +118,7 @@ namespace gestionHotel.IU.gestionHabitaciones
         {
             if (this.CamposVacios())
             {
-                    var id = this.FindControl<TextBox>("tbId");
+                    var id = this.FindControl<ComboBox>("tbId");
                     var tipo = this.FindControl<ComboBox>("cbTipoHabitacion");
                     var fechaRenovacion = this.FindControl<DatePicker>("dpFechaRenovacion");
                     var fechaReserva = this.FindControl<DatePicker>("dpFechaReserva");
@@ -97,7 +129,9 @@ namespace gestionHotel.IU.gestionHabitaciones
                     var cocina = this.FindControl<CheckBox>("cbCocina");
                     var tv = this.FindControl<CheckBox>("cbTv");
 
-                    int identificador = Convert.ToInt32(id.Text);
+                    int identificador = id.SelectedIndex;
+                    identificador = idsLibres[identificador];
+                    
                     int index = tipo.SelectedIndex;
                     string type = "";
                     if (index == 0) type = "matrimonial";
@@ -112,7 +146,7 @@ namespace gestionHotel.IU.gestionHabitaciones
                     bool tieneCocina = (bool) cocina.IsChecked;
                     bool tieneTv = (bool) tv.IsChecked;
 
-                    if (this.EsNumerico(id.Text))
+                    if (this.EsNumerico(identificador.ToString()))
                     {
                         Habitacion datosHabitacion = new Habitacion(identificador, type, fRenovacion, fReserva,
                             tieneWifi, tieneCajaFuerte, tieneMiniBar, tieneBano, tieneCocina, tieneTv);
@@ -122,7 +156,8 @@ namespace gestionHotel.IU.gestionHabitaciones
                     }
                     else
                     {
-                        new GeneralMessage("Error en alguno de los dato", false).Show();
+                        new GeneralMessage("Error en alguno de los datos", false).Show();
+                        
                     }
             }
             else
@@ -135,7 +170,7 @@ namespace gestionHotel.IU.gestionHabitaciones
         {
             if (this.CamposVacios())
             {
-                var id = this.FindControl<TextBox>("tbId");
+                var id = this.FindControl<TextBox>("tbIdModificacion");
                 var tipo = this.FindControl<TextBox>("tbType");
                 var fechaRenovacion = this.FindControl<DatePicker>("dpFechaRenovacion");
                 var fechaReserva = this.FindControl<DatePicker>("dpFechaReserva");
@@ -147,6 +182,7 @@ namespace gestionHotel.IU.gestionHabitaciones
                 var tv = this.FindControl<CheckBox>("cbTv");
 
                 int identificador = Convert.ToInt32(id.Text);
+
                 string type = tipo.Text;
                 DateTime fRenovacion = fechaRenovacion.SelectedDate.Value.DateTime;
                 DateTime fReserva = fechaReserva.SelectedDate.Value.DateTime;
@@ -157,7 +193,7 @@ namespace gestionHotel.IU.gestionHabitaciones
                 bool tieneCocina = (bool) cocina.IsChecked;
                 bool tieneTv = (bool) tv.IsChecked;
 
-                if (this.EsNumerico(id.Text))
+                if (this.EsNumerico(identificador.ToString()))
                 {
                     Habitacion datosHabitacion = new Habitacion(identificador,type,fRenovacion,fReserva, tieneWifi, tieneCajaFuerte, tieneMiniBar, tieneBano, tieneCocina, tieneTv );
 
@@ -193,7 +229,7 @@ namespace gestionHotel.IU.gestionHabitaciones
         
         private bool CamposVacios()
         {
-            var id= this.FindControl<TextBox>("tbId");
+            var id= this.FindControl<ComboBox>("tbId");
             var tipo= this.FindControl<ComboBox>("cbTipoHabitacion");
             var fechaRenovacion= this.FindControl<DatePicker>("dpFechaRenovacion");
             var fechaReserva= this.FindControl<DatePicker>("dpFechaReserva");
@@ -204,7 +240,7 @@ namespace gestionHotel.IU.gestionHabitaciones
             var cocina= this.FindControl<CheckBox>("cbCocina");
             var tv= this.FindControl<CheckBox>("cbTv");
 
-                    if (id.Text == null || tipo.SelectedIndex == null
+                    if (id.ToString() == null || tipo.SelectedIndex == null
                                     || fechaRenovacion.SelectedDate == null 
                                     || fechaReserva.SelectedDate == null || 
                                     wifi.IsChecked == null || cajaFuerte.IsChecked == null || miniBar.IsChecked == null || 

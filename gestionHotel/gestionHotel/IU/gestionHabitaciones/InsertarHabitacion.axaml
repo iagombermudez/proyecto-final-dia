@@ -12,9 +12,34 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
         
-            <DockPanel Name="dpId" Margin="5" IsVisible="true">
+            <!--<DockPanel Name="dpId" Margin="5" IsVisible="true">
                 <Label Margin="5" Width="150">Id</Label>
                 <TextBox Name="tbId" IsEnabled="True"></TextBox>
+            </DockPanel>-->
+            
+            <DockPanel Name="dpIdModificacion" Margin="5" IsVisible="false">
+                <Label Margin="5" Width="150">Id</Label>
+                <TextBox Name="tbIdModificacion" IsEnabled="false"></TextBox>
+            </DockPanel>
+            
+            <DockPanel Name="dpId" Margin="5" IsVisible="true">
+                <Label Margin="5" Width="150">Id</Label>  
+                <ComboBox
+                    Width="150" 
+                    Margin="10" 
+                    HorizontalAlignment="Center" 
+                    PlaceholderText="Tipo"
+                    Name="tbId">
+                    <!--<ComboBoxItem Content="101"/>
+                    <ComboBoxItem Content="102"/>
+                    <ComboBoxItem Content="103"/>
+                    <ComboBoxItem Content="201"/>
+                    <ComboBoxItem Content="202"/>
+                    <ComboBoxItem Content="203"/>
+                    <ComboBoxItem Content="301"/>
+                    <ComboBoxItem Content="302"/>
+                    <ComboBoxItem Content="303"/>-->
+                </ComboBox>
             </DockPanel>
             
             <DockPanel Name="dpType" Margin="5" IsVisible="false">
