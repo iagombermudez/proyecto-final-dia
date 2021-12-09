@@ -59,7 +59,7 @@
                                                         <DataGrid.Columns>
                                                                 <DataGridTextColumn Header="ID"  Binding="{Binding IdReserva}" />
                                                                 <DataGridTextColumn Header="Cliente"  Binding="{Binding Cliente.Dni}" />
-                                                                <DataGridTextColumn Header="Habitacion"  Binding="{Binding Habitacion.NumHabitacion}" />
+                                                                <DataGridTextColumn Header="Habitacion"  Binding="{Binding Habitacion.Id}" />
                                                                 <DataGridTextColumn Header="Importe por dia"  Binding="{Binding PrecioPorDia}" />
                                                                 <DataGridTextColumn Header="Fecha de entrada"  Binding="{Binding FechaEntrada}" />
                                                                 <DataGridTextColumn Header="Fecha de salida" Binding="{Binding FechaSalida}" />
