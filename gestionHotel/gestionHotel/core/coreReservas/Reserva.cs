@@ -21,10 +21,10 @@ namespace gestionHotel.core.coreReservas
             this.Tipo = tipo;
         }
 
-        private int GenerateID(DateTime fechaEntrada, Habitacion habitacion)
+        private long GenerateID(DateTime fechaEntrada, Habitacion habitacion)
         {
-            string id= fechaEntrada.Year+""+fechaEntrada.Month+""+fechaEntrada.Day+""+this.Habitacion.Id+"";
-            return Int32.Parse(id);
+            string id = fechaEntrada.Year+""+fechaEntrada.Month+""+fechaEntrada.Day+""+this.Habitacion.Id;
+            return Int64.Parse(id);
         }
         public Cliente Cliente
         {
@@ -71,7 +71,7 @@ namespace gestionHotel.core.coreReservas
             set;
         }
 
-        public int IdReserva
+        public long IdReserva
         {
             get;
            

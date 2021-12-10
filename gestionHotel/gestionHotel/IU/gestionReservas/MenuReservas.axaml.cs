@@ -11,6 +11,7 @@ using gestionHotel.core.coreHabitaciones;
 using gestionHotel.core.coreReservas;
 using gestionHotel.core.coreReservas.IO;
 using gestionHotel.core.IO;
+using gestionHotel.IU.busquedas;
 
 namespace gestionHotel.IU.gestionReservas
 {
@@ -32,6 +33,7 @@ namespace gestionHotel.IU.gestionReservas
             var opGuardar = this.FindControl<MenuItem>("OpGuardar");
             var opModificar = this.FindControl<Button>("btModificar");
             var opEliminar = this.FindControl<Button>("btEliminar");
+            var opReservasPendientes = this.FindControl<Button>("btReservasPendientes");
             var opSalir = this.FindControl<MenuItem>("OpExit");
             var opFactura = this.FindControl<Button>("btFactura");
 
@@ -42,6 +44,7 @@ namespace gestionHotel.IU.gestionReservas
             opEliminar.Click += (_, _) => this.OnDelete(dtReservas.SelectedIndex);
             opModificar.Click += (_, _) => this.OnModify(dtReservas.SelectedIndex);
             opFactura.Click += (_, _) => this.onGenerateReceipt(dtReservas.SelectedIndex);
+            opReservasPendientes.Click += (_, _) => this.OnReservasPendientes();
             opSalir.Click += (_, _) => this.OnExit();
             
             this.Closed += (_, _) => this.OnSave();
@@ -63,7 +66,7 @@ namespace gestionHotel.IU.gestionReservas
             }
         }
 
-        private void showReceipt(string texto,int id)
+        private void showReceipt(string texto,long id)
         {
             VisualizacionFactura dialog = new VisualizacionFactura(texto,id);
             dialog.ShowDialog(this);
@@ -123,6 +126,8 @@ namespace gestionHotel.IU.gestionReservas
             this.Close();
         }
         
+        private 
+        
         void OnSave()
         {
             new XmlGeneral().GuardarInfoGeneral("infoGeneral.xml");
@@ -134,6 +139,11 @@ namespace gestionHotel.IU.gestionReservas
             //NECESITA REFERENCIA A LISTA DE CLIENTES Y DE HABITACIONES
             return XmlRegistroReservas.RecuperarXML(nf,RegistroGeneral.Habitaciones,RegistroGeneral.Clientes); //toXml = new XmlRegistroReservas(this.listaReservas);
             
+        }
+
+        private void OnReservasPendientes()
+        {
+            new ReservasPendientesWindow().ShowDialog(this);
         }
         private void OnUpdateCount()
         {

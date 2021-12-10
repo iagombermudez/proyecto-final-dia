@@ -32,6 +32,7 @@
                         <Button Margin="5" Content="Insertar" Name="OpInsert"></Button>
                         <Button Margin="5" Content="Modificar" Name="btModificar"></Button>
                         <Button Margin="5" Content="Eliminar" Name="btEliminar"></Button>
+                        <Button Margin="5" Content="Ver reservas pendientes" Name="btReservasPendientes"></Button>
                         <Button Margin="5" Content="Generar factura" Name="btFactura"></Button>
                                                                         
                 </DockPanel>

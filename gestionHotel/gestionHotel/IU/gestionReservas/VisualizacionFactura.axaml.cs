@@ -11,7 +11,7 @@ namespace gestionHotel.IU.gestionReservas
         
         
         
-        public VisualizacionFactura(string mensaje, int id):this()
+        public VisualizacionFactura(string mensaje, long id):this()
         {
             this.Title = "Factura de reserva "+id;
             var tbFactura = this.FindControl<TextBlock>("tbFactura");
@@ -22,7 +22,7 @@ namespace gestionHotel.IU.gestionReservas
             btGuardar.Click += (_, _) => this.OnSave(mensaje,id);
         }
 
-        private void OnSave(string mensaje, int id)
+        private void OnSave(string mensaje, long id)
         {
             try
             {
