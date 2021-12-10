@@ -1,0 +1,40 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:core="clr-namespace:gestionHotel.core"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        Width="800" Height="450"
+        x:Class="gestionHotel.IU.busquedas.DisponibilidadWindow"
+        Title="Busquedas/Disponibilidad">
+    <StackPanel
+            Orientation="Vertical"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Stretch"
+            Margin="5">
+            <Label Content="Habitaciones Disponibles"
+                   Margin="5"></Label>
+            <Label Content="Seleccionar piso"
+                   Margin="5"></Label>
+            <ComboBox SelectedIndex="0"
+                      Name="PisoCb">
+                <ComboBoxItem>No</ComboBoxItem>
+                <ComboBoxItem>1</ComboBoxItem>
+                <ComboBoxItem>2</ComboBoxItem>
+                <ComboBoxItem>3</ComboBoxItem>
+                <ComboBoxItem>4</ComboBoxItem>
+            </ComboBox>
+            <Grid Margin="10"
+                  Height="300">
+                <DataGrid Name="Grid"
+                          Margin="5"
+                          AutoGenerateColumns="True"
+                          IsReadOnly="True"
+                          SelectionMode="Single"
+                          AlternatingRowBackground="LightBlue"
+                          Items="{Binding habitaciones}">                           
+                </DataGrid>
+            </Grid>
+        </StackPanel>
+        
+</Window>

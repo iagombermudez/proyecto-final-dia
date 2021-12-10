@@ -1,0 +1,40 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:core="clr-namespace:gestionHotel.core"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        Width="800" Height="450"
+        x:Class="gestionHotel.IU.busquedas.ReservasPendientesWindow"
+        Title="Busquedas/ReservasPendientes">
+    <StackPanel
+            Orientation="Vertical"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Stretch"
+            Margin="5">
+            <Label Content="Reservas pendientes"
+                   Margin="5"></Label>
+            <Grid Margin="10"
+                  Height="300">
+                <DataGrid Name="Grid"
+                          Margin="5"
+                          AutoGenerateColumns="True"
+                          IsReadOnly="True"
+                          SelectionMode="Single"
+                          AlternatingRowBackground="LightBlue"
+                          Items="{Binding reservas}">
+                    <!-- <DataGrid.Columns> -->
+                    <!--         <DataGridTextColumn Header="ID"  Binding="{Binding Id}" /> -->
+                    <!--         <DataGridTextColumn Header="Tipo"  Binding="{Binding Tipo}" /> -->
+                    <!--         <DataGridTextColumn Header="Cliente"  Binding="{Binding Cliente}" /> -->
+                    <!--         <DataGridTextColumn Header="FechaEntrada"  Binding="{Binding FechaEntrada}" /> -->
+                    <!--         <DataGridTextColumn Header="FechaSalida"  Binding="{Binding FechaSalida}" /> -->
+                    <!--         <DataGridTextColumn Header="Garaje" Binding="{Binding Garaje}" /> -->
+                    <!--         <DataGridTextColumn Header="Importe" Binding="{Binding Importe}" /> -->
+                    <!--         <DataGridTextColumn Header="Iva" Binding="{Binding Iva}" /> -->
+                    <!-- </DataGrid.Columns>                                  -->
+                </DataGrid>
+            </Grid>
+        </StackPanel>
+        
+</Window>
