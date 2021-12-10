@@ -11,7 +11,6 @@ namespace gestionHotel.IU.gestionClientes
 {
     public class MainWindowClientes : Window
     {
-        private RegistroGeneral registroGeneral;
         private RegistroClientes registroClientes;
         
         public MainWindowClientes()
@@ -21,12 +20,7 @@ namespace gestionHotel.IU.gestionClientes
             this.AttachDevTools();
 #endif
 
-        }
-        
-        public MainWindowClientes(RegistroGeneral rg):this()
-        {
-            this.registroGeneral = rg;
-            this.registroClientes = registroGeneral.C;
+            this.registroClientes = RegistroGeneral.Clientes;
 
             var opExit = this.FindControl<MenuItem>( "OpExit" );
             var opSave = this.FindControl<MenuItem>( "OpGuardar" );
@@ -58,13 +52,13 @@ namespace gestionHotel.IU.gestionClientes
         
         void OnSave()
         {
-            new XmlGeneral(registroGeneral).GuardarInfoGeneral("infoGeneral.xml");
+            new XmlGeneral().GuardarInfoGeneral("infoGeneral.xml");
         }
         
 
         void OnExit()
         {
-            new XmlGeneral(registroGeneral).GuardarInfoGeneral("infoGeneral.xml");
+            new XmlGeneral().GuardarInfoGeneral("infoGeneral.xml");
             this.Close();
         }
         
@@ -154,7 +148,7 @@ namespace gestionHotel.IU.gestionClientes
             else
             {
 
-                await new InsertarReserva(this.registroGeneral.R,this.registroGeneral.H, cliente).ShowDialog(this);
+                await new InsertarReserva(RegistroGeneral.Reservas,RegistroGeneral.Habitaciones, cliente).ShowDialog(this);
                 
             }
             

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -22,5 +23,15 @@ namespace gestionHotel.core.coreReservas
 
         public Reserva[] RegistroReservasToArray => this.ToArray();
         public int Length => this.Count;
+        
+        public Reserva[] GetReservasPendientes()
+        {
+            Reserva[] reservas = this.RegistroReservasToArray;
+            DateTime today = DateTime.Today;
+            IEnumerable<Reserva> reservasPendientes = reservas
+                .Where(reserva => reserva.FechaEntrada > today)
+                .Select(reserva => reserva);
+            return reservasPendientes.ToArray();
+        }
     }
 }

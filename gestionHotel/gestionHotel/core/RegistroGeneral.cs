@@ -6,44 +6,33 @@ using JetBrains.Annotations;
 
 namespace gestionHotel.core
 {
-    public class RegistroGeneral
+    public static class RegistroGeneral
     {
-        private RegistroReservas r;
-        private RegistroHabitaciones h;
-        private RegistroClientes c;
+        public static RegistroReservas registroReservas = new RegistroReservas();
+        public static RegistroHabitaciones registroHabitaciones = new RegistroHabitaciones();
+        public static RegistroClientes registroClientes = new RegistroClientes();
         //añadir clientes
 
-        public RegistroGeneral(RegistroHabitaciones h, RegistroClientes c,RegistroReservas r)
+        [NotNull]
+        public static RegistroReservas Reservas
         {
-            this.h = h;
-            this.c = c;
-            this.r = r;
+            get => registroReservas;
 
-        }
-        public RegistroGeneral()
-        {
-            this.r = new RegistroReservas();
-            this.h = new RegistroHabitaciones();
-            this.c = new RegistroClientes();
-
+            set => registroReservas = value;
         }
 
         [NotNull]
-        public RegistroReservas R
+        public static RegistroHabitaciones Habitaciones
         {
-            get => r;
-            
+            get => registroHabitaciones;
+            set => registroHabitaciones = value;
         }
 
-        [NotNull]
-        public RegistroHabitaciones H
-        {
-            get => h;
-        }
 
-        public RegistroClientes C
+        public static RegistroClientes Clientes
         {
-            get => c;
+            get => registroClientes;
+            set => registroClientes = value;
         }
     }
 }

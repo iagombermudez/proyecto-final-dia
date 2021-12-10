@@ -20,14 +20,13 @@ namespace gestionHotel.IU.gestionReservas
         //private RegistroHabitaciones h;
         //private RegistroReservas listaReservas;
 
-        private RegistroGeneral rg;
 
-        public MenuReservas(RegistroGeneral rg):this()
+        public MenuReservas()
         {
-            
-            this.rg=rg;
-            
-            
+            InitializeComponent();
+#if DEBUG
+            this.AttachDevTools();
+#endif
             var opInsertar = this.FindControl<Button>("OpInsert");
             var dtReservas = this.FindControl<DataGrid>("DtReservas");
             var opGuardar = this.FindControl<MenuItem>("OpGuardar");
@@ -35,8 +34,8 @@ namespace gestionHotel.IU.gestionReservas
             var opEliminar = this.FindControl<Button>("btEliminar");
             var opSalir = this.FindControl<MenuItem>("OpExit");
             var opFactura = this.FindControl<Button>("btFactura");
-                
-            dtReservas.Items = this.rg.R;
+
+            dtReservas.Items = RegistroGeneral.Reservas;
                 
             opGuardar.Click += (_, _) => this.OnSave();
             opInsertar.Click += (_, _) => this.OnInsert();
@@ -48,21 +47,14 @@ namespace gestionHotel.IU.gestionReservas
             this.Closed += (_, _) => this.OnSave();
             
         }
-        public MenuReservas()
-        {
-            InitializeComponent();
-#if DEBUG
-            this.AttachDevTools();
-#endif
-        }
 
         private void onGenerateReceipt(int position)
         {
             if (position != -1)
             {
 
-                string texto = this.rg.R[position].GetFactura;
-                this.showReceipt(texto,this.rg.R[position].IdReserva);
+                string texto = RegistroGeneral.Reservas[position].GetFactura;
+                this.showReceipt(texto,RegistroGeneral.Reservas[position].IdReserva);
 
             }
             else
@@ -88,7 +80,7 @@ namespace gestionHotel.IU.gestionReservas
                     await dialog.ShowDialog(this);
                     if (!dialog.IsCancelled)
                     {
-                        this.rg.R.RemoveAt(position);
+                        RegistroGeneral.Reservas.RemoveAt(position);
                     }
                     
                 }
@@ -111,7 +103,7 @@ namespace gestionHotel.IU.gestionReservas
             if (position != -1)
             {
                 
-                new InsertarReserva(this.rg.R,position,this.rg.C,this.rg.H).ShowDialog(this);
+                new InsertarReserva(RegistroGeneral.Reservas,position,RegistroGeneral.Clientes,RegistroGeneral.Habitaciones).ShowDialog(this);
             }
             else
             {
@@ -121,7 +113,7 @@ namespace gestionHotel.IU.gestionReservas
 
         private void OnInsert()
         { 
-            new InsertarReserva(this.rg.R,this.rg.C,this.rg.H).ShowDialog(this);
+            new InsertarReserva(RegistroGeneral.Reservas,RegistroGeneral.Clientes,RegistroGeneral.Habitaciones).ShowDialog(this);
             //new InsertarReserva(this.listaReservas,this.c,this.h).ShowDialog(this);
         }
         
@@ -133,20 +125,20 @@ namespace gestionHotel.IU.gestionReservas
         
         void OnSave()
         {
-            new XmlGeneral(rg).GuardarInfoGeneral("infoGeneral.xml");
+            new XmlGeneral().GuardarInfoGeneral("infoGeneral.xml");
         }
 
         
         private RegistroReservas OnLoad(string nf)
         {
             //NECESITA REFERENCIA A LISTA DE CLIENTES Y DE HABITACIONES
-            return XmlRegistroReservas.RecuperarXML(nf,this.rg.H,this.rg.C); //toXml = new XmlRegistroReservas(this.listaReservas);
+            return XmlRegistroReservas.RecuperarXML(nf,RegistroGeneral.Habitaciones,RegistroGeneral.Clientes); //toXml = new XmlRegistroReservas(this.listaReservas);
             
         }
         private void OnUpdateCount()
         {
             var count = this.FindControl<Label>("LbNumReservas");
-            count.Content=this.rg.R.Length.ToString();
+            count.Content=RegistroGeneral.Reservas.Length.ToString();
         }
         private void InitializeComponent()
         {

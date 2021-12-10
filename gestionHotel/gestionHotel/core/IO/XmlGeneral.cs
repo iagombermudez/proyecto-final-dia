@@ -12,38 +12,29 @@ namespace gestionHotel.core.IO
     public class XmlGeneral
     {
         public static string TAG_ROOT = "info";
-
-        private RegistroGeneral rg;
         
-        public XmlGeneral(RegistroGeneral rg)
-        {
-            this.rg = rg;
-        }
+        public XmlGeneral()
+        { }
 
-        public static RegistroGeneral cargarXML(string nf)
+        public static void cargarXML(string nf)
         {
             XDocument doc=XDocument.Load(nf);
-            return cargarXML(doc.Root);
+            cargarXML(doc.Root);
         }
 
         private static string FICHERO_INFO_DEFAULT = "infoGeneral.xml";
 
-        public static RegistroGeneral cargarXML(XElement root)
+        public static void cargarXML(XElement root)
         {
-            RegistroGeneral toret=null;
-            
             string rootTag=root?.Name.ToString() ?? "";
 
             if (root != null && rootTag == XmlGeneral.TAG_ROOT)
             {
-                RegistroHabitaciones regH = XmlRegistroHabitaciones.cargarXML(root.Element(XmlRegistroHabitaciones.TAG_ROOT));
-                RegistroClientes regC = RegistroClientes.FromXml(root.Element(RegistroClientes.EtqClientes));
-                RegistroReservas regR = XmlRegistroReservas.cargarXML(root.Element(XmlRegistroReservas.TAG_ROOT),regH,regC);
+                RegistroGeneral.Habitaciones = XmlRegistroHabitaciones.cargarXML(root.Element(XmlRegistroHabitaciones.TAG_ROOT));
+                RegistroGeneral.Clientes = RegistroClientes.FromXml(root.Element(RegistroClientes.EtqClientes));
+                RegistroGeneral.Reservas = XmlRegistroReservas.cargarXML(root.Element(XmlRegistroReservas.TAG_ROOT),RegistroGeneral.Habitaciones,RegistroGeneral.Clientes);
                 
-                toret = new RegistroGeneral(regH, regC,regR);
             }
-            
-            return toret;
         }
         
         public void GuardarInfoGeneral(string nf)
@@ -56,13 +47,13 @@ namespace gestionHotel.core.IO
         {
             XElement toret=new XElement(TAG_ROOT);
 
-            XmlRegistroHabitaciones xmlH = new XmlRegistroHabitaciones(this.rg.H);
+            XmlRegistroHabitaciones xmlH = new XmlRegistroHabitaciones(RegistroGeneral.Habitaciones);
             
             toret.Add(xmlH.ToXML());
 
-            toret.Add(rg.C.ToXml());
+            toret.Add(RegistroGeneral.Clientes.ToXml());
             
-            XmlRegistroReservas xmlR = new XmlRegistroReservas(this.rg.R);
+            XmlRegistroReservas xmlR = new XmlRegistroReservas(RegistroGeneral.Reservas);
             toret.Add(xmlR.ToXML());
                         
             return toret;

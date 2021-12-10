@@ -14,13 +14,16 @@ namespace gestionHotel.IU.gestionHabitaciones
 {
     public partial class InsertarHabitacion : Window
     {
-        
         private RegistroHabitaciones habitaciones;
         private Habitacion h;
         List<int> idsLibres = new List<int>();
       
-        public InsertarHabitacion(RegistroHabitaciones habitaciones):this()
+        public InsertarHabitacion()
         {
+            InitializeComponent();
+#if DEBUG
+            this.AttachDevTools();
+#endif
             idsLibres.Add(101);
             idsLibres.Add(102);
             idsLibres.Add(103);
@@ -31,7 +34,7 @@ namespace gestionHotel.IU.gestionHabitaciones
             idsLibres.Add(302);
             idsLibres.Add(303);
 
-            foreach (var h in habitaciones)
+            foreach (var h in RegistroGeneral.Habitaciones)
             {
                 if (idsLibres.Contains(h.Id)) idsLibres.Remove(h.Id);
             }
@@ -39,81 +42,12 @@ namespace gestionHotel.IU.gestionHabitaciones
             var cbHabitaciones = this.FindControl<ComboBox>("tbId");
             cbHabitaciones.Items = idsLibres;
             
-            this.habitaciones = habitaciones;
-            this.Boton("Insertar"); 
-        }
-        
-        public InsertarHabitacion(RegistroHabitaciones habitaciones, Habitacion h):this()
-        {
-
-            this.habitaciones = habitaciones;
-            this.h = h;
-            this.RellenarDatos();
-
-            var dpId = this.FindControl<DockPanel>("dpId");
-            dpId.IsVisible = false;
+            this.habitaciones = RegistroGeneral.Habitaciones;
             
-            var dpIdModificacion = this.FindControl<DockPanel>("dpIdModificacion");
-            dpIdModificacion.IsVisible = true;
-            
-            var tbIdModificacion = this.FindControl<TextBox>("tbIdModificacion");
-            tbIdModificacion.Text = h.Id.ToString();
-            
-            
-            var dpTypeComboBox = this.FindControl<DockPanel>("dpTypeComboBox");
-            dpTypeComboBox.IsVisible = false;
-            
-            var dpType = this.FindControl<DockPanel>("dpType");
-            dpType.IsVisible = true;
-            
-            var tbType = this.FindControl<TextBox>("tbType");
-            tbType.Text = h.Tipo;
-            
-            this.Boton("Guardar");
-        }
-        
-        public InsertarHabitacion()
-        {
-            InitializeComponent();
-#if DEBUG
-            this.AttachDevTools();
-#endif
-        }
-
-        private void RellenarDatos()
-        {
-            //Relaciono un componente con una variable.
-            var id = this.FindControl<ComboBox>("tbId");
-            var tipo= this.FindControl<ComboBox>("cbTipoHabitacion");
-            var fechaRenovacion= this.FindControl<DatePicker>("dpFechaRenovacion");
-            var fechaReserva= this.FindControl<DatePicker>("dpFechaReserva");
-            var wifi= this.FindControl<CheckBox>("cbWifi");
-            var cajaFuerte= this.FindControl<CheckBox>("cbCajaFuerte");
-            var miniBar= this.FindControl<CheckBox>("cbMiniBar");
-            var bano= this.FindControl<CheckBox>("cbBano");
-            var cocina= this.FindControl<CheckBox>("cbCocina");
-            var tv= this.FindControl<CheckBox>("cbTv");
-
-            //Se hace tipo.Text para pasarlo a texto
-            id.SelectedItem = this.h.Id.ToString();
-            tipo.SelectedItem = this.h.Tipo;
-            fechaRenovacion.SelectedDate = this.h.FechaRenovacion;
-            fechaReserva.SelectedDate = this.h.FechaReserva;
-            wifi.IsChecked = this.h.Wifi;
-            cajaFuerte.IsChecked = this.h.CajaFuerte;
-            miniBar.IsChecked = this.h.MiniBar;
-            bano.IsChecked = this.h.Bano;
-            cocina.IsChecked = this.h.CajaFuerte;
-            tv.IsChecked = this.h.Tv;
-        }
-        private void Boton(string op)
-        {
             var btInsertarHabitacion = this.FindControl<Button>("btInsertarHabitacion");
-            //.Content: Obtiene o establece el contenido que se mostrará. En nuestro caso Guardar cambios.
-            btInsertarHabitacion.Content = op;
-            btInsertarHabitacion.Click += (_,_) => this.Seleccion();
+            btInsertarHabitacion.Click += (_,_) => this.Insertar();
         }
-        
+
         private void Insertar()
         {
             if (this.CamposVacios())

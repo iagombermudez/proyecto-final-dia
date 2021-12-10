@@ -15,7 +15,6 @@ namespace gestionHotel.IU
 {
     public partial class MainWindow : Window
     {
-        private RegistroGeneral rg;
         public MainWindow()
         {
             InitializeComponent();
@@ -37,15 +36,8 @@ namespace gestionHotel.IU
             
             this.Closed += (_, _) => this.OpSalir();
 
+            //XmlGeneral.cargarXML("infoGeneral.xml"); 
             
-            try
-            {
-                this.rg = XmlGeneral.cargarXML("infoGeneral.xml"); 
-            }
-            catch (Exception e)
-            {
-                this.rg = new RegistroGeneral();
-            }
             
             //CARGAR DATRAGRID CON RESULTADO DE BUSQUEDA DE HABITACIONES LIBRES
             var dtHabitacionesLibres = this.FindControl<DataGrid>("DtHabitacionesLibres");
@@ -61,21 +53,21 @@ namespace gestionHotel.IU
         
         void OnSave()
         {
-            new XmlGeneral(rg).GuardarInfoGeneral("infoGeneral.xml");
+            new XmlGeneral().GuardarInfoGeneral("infoGeneral.xml");
         }
         
         private async void OpVerReservas()
         {
-            await new MenuReservas(this.rg).ShowDialog(this);
+            await new MenuReservas().ShowDialog(this);
         }
 
         private async void OpenHabitaciones()
         {
-            await new GestionHabitaciones(this.rg).ShowDialog(this);
+            await new GestionHabitaciones().ShowDialog(this);
         }
         private async void OpenClientes()
         {
-            await new MainWindowClientes(this.rg).ShowDialog(this);
+            await new MainWindowClientes().ShowDialog(this);
         }
 
         private void InitializeComponent()
