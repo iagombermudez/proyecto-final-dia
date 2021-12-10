@@ -6,6 +6,9 @@ namespace gestionHotel.core.coreClientes
 {
     public class Cliente
     {
+        public Cliente()
+        { }
+
         public Cliente(string dni, string nombre, int telefono, string email, string direccion)
         {
             this.Dni = dni;

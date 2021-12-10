@@ -287,9 +287,8 @@ namespace gestionHotel.IU.gestionReservas
 
                 if (this.CheckNumberInteger(iva.Text) && this.CheckNumberDouble(precioDia.Text))
                 {
-                    
-                    Reserva toAdd = new Reserva(cliente,habitacion,fEntrada,fSalida,Int32.Parse(iva.Text),hayGaraje,Double.Parse(precioDia.Text),tipo.Text );
-
+                    Reserva toAdd = new Reserva(cliente,habitacion,fEntrada,fSalida,Int32.Parse(iva.Text),hayGaraje,Double.Parse(precioDia.Text), tipo.Text);
+                    //Reserva toAdd = new Reserva(cliente,habitacion,fEntrada,fSalida,Int32.Parse(iva.Text),hayGaraje,Double.Parse(precioDia.Text),tipo.Text );
                     RegistroGeneral.Reservas.AddReserva(toAdd);
                     this.Close();
                 }
@@ -308,7 +307,7 @@ namespace gestionHotel.IU.gestionReservas
 
         private Cliente GetCliente()
         {
-            Cliente toret=null;
+            Cliente toret = new Cliente();
 
             var clientes = this.FindControl<ComboBox>("cbClienteReserva");
 
@@ -331,8 +330,7 @@ namespace gestionHotel.IU.gestionReservas
                 {
                     if (cliente.Dni == DNI)
                     {
-                        toret = cliente;
-                        break;
+                        return cliente;
                     }   
                 }
             }
@@ -344,7 +342,7 @@ namespace gestionHotel.IU.gestionReservas
 
         private Habitacion GetHabitacion()
         {
-            Habitacion toret=null;
+            Habitacion toret=new Habitacion();
     
           
             var habitaciones = this.FindControl<ComboBox>("cbHabitacionReserva");
@@ -368,8 +366,7 @@ namespace gestionHotel.IU.gestionReservas
                 {
                     if (habitacion.Id == numHabitacion)
                     {
-                        toret = habitacion;
-                        break;
+                        return habitacion;
                     }   
                 }
             }

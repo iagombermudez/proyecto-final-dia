@@ -41,7 +41,7 @@
             <DatePicker Name="dpFechaEntrada"></DatePicker>
         </DockPanel>
         <DockPanel Margin="5">
-            <Label Margin="5" Width="150" >Fecha de entrada</Label>
+            <Label Margin="5" Width="150" >Fecha de salida</Label>
             <DatePicker Name="dpFechaSalida"></DatePicker>
         </DockPanel>
         

@@ -4,6 +4,9 @@ namespace gestionHotel.core.coreHabitaciones
 {
     public class Habitacion
     {
+        public Habitacion()
+        { }
+
         public Habitacion(int id, string tipo, DateTime fechaRenovacion, DateTime fechaReserva, bool wifi, bool cajaFuete, bool miniBar, bool bano, bool cocina, bool tv)
         {
             Id = id;

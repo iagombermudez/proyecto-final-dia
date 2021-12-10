@@ -2,6 +2,7 @@
 using System.IO;
 using gestionHotel.core.coreClientes;
 using gestionHotel.core.coreHabitaciones;
+using Microsoft.VisualBasic;
 
 namespace gestionHotel.core.coreReservas
 {
@@ -16,13 +17,13 @@ namespace gestionHotel.core.coreReservas
             IVA = iva;
             UsaGaraje = usaGaraje;
             PrecioPorDia = precioPorDia;
-            this.IdReserva = this.GenerateID();
+            this.IdReserva = this.GenerateID(fechaEntrada, habitacion);
             this.Tipo = tipo;
         }
 
-        private int GenerateID()
+        private int GenerateID(DateTime fechaEntrada, Habitacion habitacion)
         {
-            string id=this.FechaEntrada.Year+""+this.FechaEntrada.Month+""+this.FechaEntrada.Day+""+this.Habitacion.Id+"";
+            string id= fechaEntrada.Year+""+fechaEntrada.Month+""+fechaEntrada.Day+""+this.Habitacion.Id+"";
             return Int32.Parse(id);
         }
         public Cliente Cliente
@@ -43,6 +44,7 @@ namespace gestionHotel.core.coreReservas
         public DateTime FechaEntrada
         {
             get;
+            set;
         }
 
         public DateTime FechaSalida
