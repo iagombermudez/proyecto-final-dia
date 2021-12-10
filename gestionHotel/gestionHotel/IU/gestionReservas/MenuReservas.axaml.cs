@@ -103,7 +103,7 @@ namespace gestionHotel.IU.gestionReservas
             if (position != -1)
             {
                 
-                new InsertarReserva(RegistroGeneral.Reservas,position,RegistroGeneral.Clientes,RegistroGeneral.Habitaciones).ShowDialog(this);
+                new InsertarReserva().ShowDialog(this);
             }
             else
             {
@@ -113,7 +113,7 @@ namespace gestionHotel.IU.gestionReservas
 
         private void OnInsert()
         { 
-            new InsertarReserva(RegistroGeneral.Reservas,RegistroGeneral.Clientes,RegistroGeneral.Habitaciones).ShowDialog(this);
+            new InsertarReserva().ShowDialog(this);
             //new InsertarReserva(this.listaReservas,this.c,this.h).ShowDialog(this);
         }
         

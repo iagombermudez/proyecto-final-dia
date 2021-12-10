@@ -119,7 +119,7 @@ namespace gestionHotel.IU.gestionHabitaciones
             else
             {
 
-                await new InsertarReserva(RegistroGeneral.Reservas, RegistroGeneral.Clientes, habitacion).ShowDialog(this);
+                await new InsertarReserva(habitacion).ShowDialog(this);
                 
             }
             

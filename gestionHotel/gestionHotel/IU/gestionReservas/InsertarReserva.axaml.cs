@@ -14,51 +14,41 @@ namespace gestionHotel.IU.gestionReservas
 {
     public partial class InsertarReserva : Window
     {
-        
-        private RegistroReservas reservas;
         private Cliente _cliente;
         private Habitacion _habitacion;
-        private RegistroClientes _clientes;
-        private RegistroHabitaciones _habitaciones;
         //private Reserva r;
         private int position;
-        public InsertarReserva(RegistroReservas reservas, RegistroHabitaciones habitaciones,Cliente cliente):this()
+        public InsertarReserva(Cliente cliente)
         {
             this.position = -1;
-            this.reservas = reservas;
             this._cliente = cliente;
-            this._habitaciones = habitaciones;
             this.renderTemplate();
             this.drawButton("Insertar"); 
         }
         
-        public InsertarReserva(RegistroReservas reservas,RegistroClientes clientes,Habitacion habitacion):this()
+        public InsertarReserva(Habitacion habitacion)
         {
             this.position = -1;
-            this.reservas = reservas;
-            this._clientes = clientes;
             this._habitacion = habitacion;
             this.renderTemplate();
             this.drawButton("Insertar"); 
         }
-        public InsertarReserva(RegistroReservas reservas, RegistroClientes clientes, RegistroHabitaciones habitaciones):this()
+        public InsertarReserva()
         {
+            InitializeComponent();
+#if DEBUG
+            this.AttachDevTools();
+#endif
             this.position = -1;
-            this.reservas = reservas;
-            this._clientes = clientes;
-            this._habitaciones = habitaciones;
             this.renderTemplate();
             this.drawButton("Insertar");
             
         }
         
         //Constructor para modificacion
-        public InsertarReserva(RegistroReservas reservas,int position, RegistroClientes clientes,RegistroHabitaciones habitaciones):this()
+        public InsertarReserva(int position)
         {
-            this.reservas = reservas;
             this.position = position;
-            this._clientes = clientes;
-            this._habitaciones = habitaciones;
             this.fillData();
             this.renderTemplateModificar();
             this.drawButton("Guardar cambios");
@@ -91,34 +81,20 @@ namespace gestionHotel.IU.gestionReservas
             var dpClientes = this.FindControl<DockPanel>("dpClientes");
             dpClientes.IsVisible = true;
             var tbDni = this.FindControl<TextBox>("tbDNICliente");
-            tbDni.Text = this.reservas[this.position].Cliente.Dni;
+            tbDni.Text = RegistroGeneral.Reservas.RegistroReservasToArray[this.position].Cliente.Dni;
             
             
             cbClientes.IsVisible = false;
             var dpHabitaciones = this.FindControl<DockPanel>("dpHabitaciones");
             dpHabitaciones.IsVisible = true;
             var tbNumH = this.FindControl<TextBox>("tbNumHabitacion");
-            tbNumH.Text = this.reservas[this.position].Habitacion.Id.ToString();
+            tbNumH.Text = RegistroGeneral.Reservas.RegistroReservasToArray[this.position].Habitacion.Id.ToString();
 
             tbDni.IsEnabled = true;
             tbNumH.IsEnabled = true;
 
 
         }
-
-
-        public InsertarReserva()
-        {
-            InitializeComponent();
-#if DEBUG
-            this.AttachDevTools();
-#endif
-
-            
-           
-
-        }
-
         private void fillData()
         {
             var tipo= this.FindControl<TextBox>("tbTipo");
@@ -128,14 +104,14 @@ namespace gestionHotel.IU.gestionReservas
             var garaje= this.FindControl<CheckBox>("cbGaraje");
             var precioDia = this.FindControl<TextBox>("tbImportePorDia");
 
-            tipo.Text = this.reservas[this.position].Tipo;
-            fechaEntrada.SelectedDate = this.reservas[this.position].FechaEntrada;
-            fechaSalida.SelectedDate = this.reservas[this.position].FechaSalida;
-            iva.Text = this.reservas[this.position].IVA.ToString();
-            garaje.IsChecked = this.reservas[this.position].UsaGaraje;
-            precioDia.Text = this.reservas[this.position].PrecioPorDia.ToString();
-            this._cliente = this.reservas[this.position].Cliente;
-            this._habitacion = this.reservas[this.position].Habitacion;
+            tipo.Text = RegistroGeneral.Reservas.RegistroReservasToArray[this.position].Tipo;
+            fechaEntrada.SelectedDate = RegistroGeneral.Reservas.RegistroReservasToArray[this.position].FechaEntrada;
+            fechaSalida.SelectedDate = RegistroGeneral.Reservas.RegistroReservasToArray[this.position].FechaSalida;
+            iva.Text = RegistroGeneral.Reservas.RegistroReservasToArray[this.position].IVA.ToString();
+            garaje.IsChecked = RegistroGeneral.Reservas.RegistroReservasToArray[this.position].UsaGaraje;
+            precioDia.Text = RegistroGeneral.Reservas.RegistroReservasToArray[this.position].PrecioPorDia.ToString();
+            this._cliente = RegistroGeneral.Reservas.RegistroReservasToArray[this.position].Cliente;
+            this._habitacion = RegistroGeneral.Reservas.RegistroReservasToArray[this.position].Habitacion;
         }
         private void drawButton(string op)
         {
@@ -164,7 +140,7 @@ namespace gestionHotel.IU.gestionReservas
             }
             else
             {
-                cbClientes.Items = this._clientes;
+                cbClientes.Items = RegistroGeneral.Clientes;
             }
 
             if (this._habitacion != null)
@@ -177,7 +153,7 @@ namespace gestionHotel.IU.gestionReservas
             }
             else
             {
-                cbHabitaciones.Items = this._habitaciones;
+                cbHabitaciones.Items = RegistroGeneral.Habitaciones;
             }
             
 
@@ -230,8 +206,8 @@ namespace gestionHotel.IU.gestionReservas
                         {
                             Reserva toAdd = new Reserva(cliente,habitacion,fEntrada,fSalida,Int32.Parse(iva.Text),hayGaraje,Double.Parse(precioDia.Text),tipo.Text );
                             
-                            this.reservas.RemoveReserva(this.reservas[this.position]);
-                            this.reservas.AddReserva(toAdd);
+                            RegistroGeneral.Reservas.RemoveReserva(RegistroGeneral.Reservas.RegistroReservasToArray[this.position]);
+                            RegistroGeneral.Reservas.AddReserva(toAdd);
                             this.Close();
                         }
                         else
@@ -261,7 +237,7 @@ namespace gestionHotel.IU.gestionReservas
             var tbHab = this.FindControl<TextBox>("tbNumHabitacion");
             int num = Int32.Parse((tbHab.Text));
 
-            foreach (var h in this._habitaciones)
+            foreach (var h in RegistroGeneral.Habitaciones)
             {
                 if (h.Id == num)
                 {
@@ -279,7 +255,7 @@ namespace gestionHotel.IU.gestionReservas
             var tbClient = this.FindControl<TextBox>("tbDNICliente");
             string dni = tbClient.Text;
 
-            foreach (var c in this._clientes)
+            foreach (var c in RegistroGeneral.Clientes)
             {
                 if (c.Dni == dni)
                 {
@@ -314,7 +290,7 @@ namespace gestionHotel.IU.gestionReservas
                     
                     Reserva toAdd = new Reserva(cliente,habitacion,fEntrada,fSalida,Int32.Parse(iva.Text),hayGaraje,Double.Parse(precioDia.Text),tipo.Text );
 
-                    this.reservas.AddReserva(toAdd);
+                    RegistroGeneral.Reservas.AddReserva(toAdd);
                     this.Close();
                 }
                 else
@@ -351,7 +327,7 @@ namespace gestionHotel.IU.gestionReservas
             {
                 var etClienteDDNI = this.FindControl<TextBox>("tbDNICliente");
                 string DNI = etClienteDDNI.Text;
-                foreach (var cliente in this._clientes)
+                foreach (var cliente in RegistroGeneral.Clientes)
                 {
                     if (cliente.Dni == DNI)
                     {
@@ -388,7 +364,7 @@ namespace gestionHotel.IU.gestionReservas
             {
                 var etNumHabitacion = this.FindControl<TextBox>("tbNumHabitacion");
                 int numHabitacion = Int32.Parse(etNumHabitacion.Text);
-                foreach (var habitacion in this._habitaciones)
+                foreach (var habitacion in RegistroGeneral.Habitaciones)
                 {
                     if (habitacion.Id == numHabitacion)
                     {

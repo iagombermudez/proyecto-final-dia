@@ -148,7 +148,7 @@ namespace gestionHotel.IU.gestionClientes
             else
             {
 
-                await new InsertarReserva(RegistroGeneral.Reservas,RegistroGeneral.Habitaciones, cliente).ShowDialog(this);
+                await new InsertarReserva(cliente).ShowDialog(this);
                 
             }
             
