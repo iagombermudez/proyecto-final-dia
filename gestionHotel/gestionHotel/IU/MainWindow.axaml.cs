@@ -30,6 +30,9 @@ namespace gestionHotel.IU
 
             var opVerReservas = this.FindControl<MenuItem>("OpVerReservas");
             opVerReservas.Click += (_, _) => this.OpVerReservas();
+            
+            var opGrafComodidades = this.FindControl<MenuItem>("OpComodidades");
+            opGrafComodidades.Click += (_, _) => this.OnGraphComodity();
 
             var opSalir = this.FindControl<MenuItem>("OpExit");
             opSalir.Click += (_, _) => this.OpSalir();
@@ -78,6 +81,11 @@ namespace gestionHotel.IU
         {
             AvaloniaXamlLoader.Load(this);
         }
-        
+
+        private async void OnGraphComodity()
+        {
+            await new ComodidadesHabitacion().ShowDialog(this);
+        }
+
     }
 }
