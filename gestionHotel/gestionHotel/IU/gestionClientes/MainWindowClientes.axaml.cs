@@ -31,6 +31,7 @@ namespace gestionHotel.IU.gestionClientes
             var btRes = this.FindControl<Button>( "BtRes" );
             var btVerReservas = this.FindControl<Button>( "BtVerReservas" );
             var dtClientes = this.FindControl<DataGrid>( "DtClientes" );
+            var btGrafCliente = this.FindControl<Button>("BtGrafCliente");
 
             opExit.Click += (_, _) => this.OnExit();
             opSave.Click += (_, _) => this.OnSave();
@@ -39,6 +40,7 @@ namespace gestionHotel.IU.gestionClientes
             btMod.Click += (_, _) => this.OnMod((Cliente) dtClientes.SelectedItem);
             btVerReservas.Click += (_, _) => this.OnReservasClientes((Cliente) dtClientes.SelectedItem);
             btRes.Click += (_, _) => this.OnRes((Cliente) dtClientes.SelectedItem);
+            btGrafCliente.Click += (_, _) => this.OnGraphClienteInd();
             
             this.Closed += (_, _) => this.OnSave();
             
@@ -169,6 +171,7 @@ namespace gestionHotel.IU.gestionClientes
             }
         }
         
+        async void OnGraphClienteInd() { await new GrafReservasIndividuales().ShowDialog(this); }
        
     }
 }

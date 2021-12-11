@@ -34,6 +34,7 @@
                         <Button Margin="5" Content="Eliminar" Name="btEliminar"></Button>
                         <Button Margin="5" Content="Ver reservas pendientes" Name="btReservasPendientes"></Button>
                         <Button Margin="5" Content="Generar factura" Name="btFactura"></Button>
+                        <Button Margin="5" Content="Grafico de Reservas" Name="BtGrafCliente"></Button>
                                                                         
                 </DockPanel>
                 

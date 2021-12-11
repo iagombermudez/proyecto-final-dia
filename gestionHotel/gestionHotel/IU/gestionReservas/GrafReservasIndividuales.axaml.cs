@@ -30,6 +30,7 @@ namespace gestionHotel.IU.gestionReservas
             var lbWarning = this.FindControl<Label>("LbWarning");
             var cbTimeSelect = this.FindControl<ComboBox>("CbTimeSelect");
             AvaPlot avaPlot1 = this.Find<AvaPlot>("SpGraph");
+            avaPlot1.Plot.Clear();
             
             string dni = tbSearch.Text;
             bool flag = false;

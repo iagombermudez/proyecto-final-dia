@@ -36,7 +36,8 @@ namespace gestionHotel.IU.gestionReservas
             var opReservasPendientes = this.FindControl<Button>("btReservasPendientes");
             var opSalir = this.FindControl<MenuItem>("OpExit");
             var opFactura = this.FindControl<Button>("btFactura");
-
+            var btGrafCliente = this.FindControl<Button>("BtGrafCliente");
+            
             dtReservas.Items = RegistroGeneral.Reservas;
                 
             opGuardar.Click += (_, _) => this.OnSave();
@@ -45,6 +46,7 @@ namespace gestionHotel.IU.gestionReservas
             opModificar.Click += (_, _) => this.OnModify(dtReservas.SelectedIndex);
             opFactura.Click += (_, _) => this.onGenerateReceipt(dtReservas.SelectedIndex);
             opReservasPendientes.Click += (_, _) => this.OnReservasPendientes();
+            btGrafCliente.Click += (_, _) => this.OnGraphClienteInd();
             opSalir.Click += (_, _) => this.OnExit();
             
             this.Closed += (_, _) => this.OnSave();
@@ -155,6 +157,8 @@ namespace gestionHotel.IU.gestionReservas
             AvaloniaXamlLoader.Load(this);
         }
 
+        async void OnGraphClienteInd() { await new GrafReservasIndividuales().ShowDialog(this); }
+        
         
     }
 }

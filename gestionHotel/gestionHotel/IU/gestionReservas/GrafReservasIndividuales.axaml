@@ -32,7 +32,7 @@
             
         <DockPanel DockPanel.Dock="Bottom" Height="40">
             <Label IsVisible="False" DockPanel.Dock="Top" Name="LbWarning" Margin="5">
-                No se ha encontrado ningun cliente con el dni introducido
+                No se ha encontrado ninguna reserva asociada con el dni introducido
             </Label>
         </DockPanel>
         

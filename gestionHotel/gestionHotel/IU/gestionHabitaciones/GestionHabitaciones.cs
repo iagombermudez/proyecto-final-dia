@@ -150,7 +150,7 @@ namespace gestionHotel.IU.gestionHabitaciones
             await new DisponibilidadWindow().ShowDialog(this);
         }
         
-        private async void OnGraphComodity() { await new ComodidadesHabitacion().ShowDialog(this); }
+        async void OnGraphComodity() { await new ComodidadesHabitacion().ShowDialog(this); }
         
     }
 }

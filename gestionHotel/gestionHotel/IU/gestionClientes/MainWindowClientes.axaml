@@ -42,6 +42,9 @@
                     <Button Name="BtVerReservas"
                             Margin="5"
                             Content="Ver reservas del cliente" />
+                    <Button Name="BtGrafCliente"
+                            Margin="5"
+                            Content="Grafico de Reservas" />
                     
                 </DockPanel>
                 
