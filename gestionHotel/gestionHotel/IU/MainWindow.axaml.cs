@@ -33,6 +33,9 @@ namespace gestionHotel.IU
             
             var opGrafComodidades = this.FindControl<MenuItem>("OpComodidades");
             opGrafComodidades.Click += (_, _) => this.OnGraphComodity();
+            
+            var opGrafReservasInd = this.FindControl<MenuItem>("OpReservasCliente");
+            opGrafReservasInd.Click += (_, _) => this.OnGraphReservaInd();
 
             var opSalir = this.FindControl<MenuItem>("OpExit");
             opSalir.Click += (_, _) => this.OpSalir();
@@ -85,6 +88,11 @@ namespace gestionHotel.IU
         private async void OnGraphComodity()
         {
             await new ComodidadesHabitacion().ShowDialog(this);
+        }
+        
+        private async void OnGraphReservaInd()
+        {
+            await new GrafReservasIndividuales().ShowDialog(this);
         }
 
     }

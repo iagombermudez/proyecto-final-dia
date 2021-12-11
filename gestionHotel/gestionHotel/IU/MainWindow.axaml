@@ -24,6 +24,7 @@
             <MenuItem Header="Clientes" Name="OpClientes"/>
             <MenuItem Header="Graficos">
                 <MenuItem Header="Comodidades del Hotel" Name="OpComodidades" />
+                <MenuItem Header="Reservas Particulares" Name="OpReservasCliente" />
             </MenuItem>
             
         </Menu>

@@ -1,0 +1,45 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ScottPlot="clr-namespace:ScottPlot.Avalonia;assembly=ScottPlot.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="gestionHotel.IU.gestionReservas.GrafReservasIndividuales"
+        MinWidth="900"
+        MinHeight="600"
+        Width="900"
+        Height="600"
+        Title="Grafico Reservas de Cliente">
+    
+    <DockPanel
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch"
+        LastChildFill="True">
+            
+            
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <TextBox Name="TbClientID"
+                     Watermark="DNI de Cliente" Margin="5" Width="120"/>
+            <Button Name="BtSearch" Margin="5">
+                Buscar
+            </Button>
+            <ComboBox SelectedIndex="0" Name="CbTimeSelect" Margin="5">
+                <ComboBoxItem>Mensual</ComboBoxItem>
+                <ComboBoxItem>Anual</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+        
+            
+        <DockPanel DockPanel.Dock="Bottom" Height="40">
+            <Label IsVisible="False" DockPanel.Dock="Top" Name="LbWarning" Margin="5">
+                No se ha encontrado ningun cliente con el dni introducido
+            </Label>
+        </DockPanel>
+        
+        
+        <ScottPlot:AvaPlot IsVisible="False" Name="SpGraph"/>
+        
+        
+    </DockPanel>
+    
+</Window>
