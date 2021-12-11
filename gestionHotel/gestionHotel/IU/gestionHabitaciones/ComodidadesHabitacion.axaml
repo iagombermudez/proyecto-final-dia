@@ -1,0 +1,22 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ScottPlot="clr-namespace:ScottPlot.Avalonia;assembly=ScottPlot.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="gestionHotel.IU.gestionHabitaciones.ComodidadesHabitacion"
+        MinWidth="1300"
+        MinHeight="600"
+        Width="1300"
+        Height="600"
+        Title="Grafico Comodidades">
+    
+    <DockPanel
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch">
+        <TextBlock DockPanel.Dock="Top" Name="TbRoomCount" Margin="5" Height="30"/>
+        <ScottPlot:AvaPlot Name="SpGraph"/>
+        
+    </DockPanel>
+    
+</Window>

@@ -38,6 +38,7 @@ namespace gestionHotel.IU.gestionHabitaciones
             var opVerReservas = this.FindControl<Button>("btVerReservas");
             var opVerDisponibilidad = this.FindControl<Button>("btVerDisponibilidad");
             var btRes = this.FindControl<Button>( "BtRes" );
+            var btCom = this.FindControl<Button>("btComodidades");
             
                 
             //Para que el datagrid se cargue con los datos del txt.
@@ -50,6 +51,7 @@ namespace gestionHotel.IU.gestionHabitaciones
             opVerDisponibilidad.Click += (_, _) => this.VerDisponibilidad();
             opExit.Click += (_, _) => this.OnExit();
             btRes.Click += (_, _) => this.OnRes((Habitacion) dtHabitaciones.SelectedItem);
+            btCom.Click += (_, _) => this.OnGraphComodity();
             
             this.Closed += (_, _) => this.OnSave();
             
@@ -147,5 +149,8 @@ namespace gestionHotel.IU.gestionHabitaciones
         {
             await new DisponibilidadWindow().ShowDialog(this);
         }
+        
+        private async void OnGraphComodity() { await new ComodidadesHabitacion().ShowDialog(this); }
+        
     }
 }

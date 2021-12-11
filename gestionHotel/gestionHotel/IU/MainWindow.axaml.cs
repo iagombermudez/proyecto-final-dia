@@ -36,12 +36,17 @@ namespace gestionHotel.IU
             
             this.Closed += (_, _) => this.OpSalir();
 
-            XmlGeneral.cargarXML("infoGeneral.xml"); 
-            
+            try
+            {
+                XmlGeneral.cargarXML("infoGeneral.xml");
+            }
+            catch (Exception ex)
+            {
+                
+            }
+
             //CARGAR DATRAGRID CON RESULTADO DE BUSQUEDA DE HABITACIONES LIBRES
             var dtHabitacionesLibres = this.FindControl<DataGrid>("DtHabitacionesLibres");
-            
-            //dtHabitacionesLibres.Items=
         }
 
         private void OpSalir()

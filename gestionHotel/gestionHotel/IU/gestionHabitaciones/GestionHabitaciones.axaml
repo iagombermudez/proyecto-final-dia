@@ -32,6 +32,7 @@
                         <Button Margin="5" Content="Reservar" Name="BtRes"></Button>
                         <Button Margin="5" Content="Ver reservas de la habitacion" Name="btVerReservas"></Button>
                         <Button Margin="5" Content="Ver habitaciones vacías" Name="btVerDisponibilidad"></Button>
+                        <Button Margin="5" Content="Numero de Comodidades" Name="btComodidades"></Button>
                                 
                 </DockPanel>
                 

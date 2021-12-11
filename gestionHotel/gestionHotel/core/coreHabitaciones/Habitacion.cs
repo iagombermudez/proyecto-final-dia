@@ -100,5 +100,17 @@ namespace gestionHotel.core.coreHabitaciones
         {
             return Id.ToString();
         }
+
+        public bool[] Comodidades()
+        {
+            bool[] toret = new bool[6];
+            toret[0] = Wifi;
+            toret[1] = CajaFuerte;
+            toret[2] = MiniBar;
+            toret[3] = Bano;
+            toret[4] = Cocina;
+            toret[5] = Tv;
+            return toret;
+        }
     }
 }
