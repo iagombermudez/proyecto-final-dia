@@ -4,7 +4,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:core="clr-namespace:gestionHotel.core"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        Width="800" Height="450"
+        MinWidth="1300"
+        MinHeight="600"
+        Width="1300"
+        Height="600"
         x:Class="gestionHotel.IU.busquedas.DisponibilidadWindow"
         Title="Busquedas/Disponibilidad">
     <StackPanel
@@ -26,14 +29,30 @@
             </ComboBox>
             <Grid Margin="10"
                   Height="300">
-                <DataGrid Name="Grid"
-                          Margin="5"
-                          AutoGenerateColumns="True"
-                          IsReadOnly="True"
-                          SelectionMode="Single"
-                          AlternatingRowBackground="LightBlue"
-                          Items="{Binding habitaciones}">                           
-                </DataGrid>
+                 <DataGrid Name="Grid"
+                        Margin="5"
+                        AutoGenerateColumns="False"
+                        IsReadOnly="True"
+                        SelectionMode="Single"
+                        AlternatingRowBackground="LightBlue"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        MinHeight="250">
+                        <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                                <DataGridTextColumn Header="Piso" Binding="{Binding Piso}" />
+                                <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}" />
+                                <DataGridTextColumn Header="Fecha última renovación" Binding="{Binding FechaRenovacion}" />
+                                <DataGridTextColumn Header="Fecha de última reserva" Binding="{Binding FechaReserva}" />
+                                <DataGridTextColumn Header="Wifi" Binding="{Binding Wifi}" />
+                                <DataGridTextColumn Header="Caja Fuerte" Binding="{Binding CajaFuerte}" />
+                                <DataGridTextColumn Header="Mini Bar" Binding="{Binding MiniBar}" />
+                                <DataGridTextColumn Header="Baño" Binding="{Binding Bano}" />
+                                <DataGridTextColumn Header="Cocina" Binding="{Binding Cocina}" />
+                                <DataGridTextColumn Header="TV" Binding="{Binding Tv}" />
+                        </DataGrid.Columns>
+                        
+                  </DataGrid>
             </Grid>
         </StackPanel>
         

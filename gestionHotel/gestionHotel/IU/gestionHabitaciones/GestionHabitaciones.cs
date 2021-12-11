@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Serialization;
 using Avalonia;
 using Avalonia.Controls;
@@ -9,6 +10,7 @@ using gestionHotel.core;
 using gestionHotel.core.coreHabitaciones;
 using gestionHotel.core.IO;
 using gestionHotel.IU;
+using gestionHotel.IU.busquedas;
 using gestionHotel.IU.gestionHabitaciones;
 using gestionHotel.IU.gestionReservas;
 using hotel;
@@ -33,6 +35,8 @@ namespace gestionHotel.IU.gestionHabitaciones
             var opGuardar = this.FindControl<MenuItem>("OpGuardar");
             var opModificar = this.FindControl<Button>("btModificar");
             var opEliminar = this.FindControl<Button>("btEliminar");
+            var opVerReservas = this.FindControl<Button>("btVerReservas");
+            var opVerDisponibilidad = this.FindControl<Button>("btVerDisponibilidad");
             var btRes = this.FindControl<Button>( "BtRes" );
             
                 
@@ -42,6 +46,8 @@ namespace gestionHotel.IU.gestionHabitaciones
             opInsertar.Click += (_, _) => this.Insertar();
             opEliminar.Click += (_, _) => this.Eliminar(dtHabitaciones.SelectedIndex);
             opModificar.Click += (_, _) => this.Modificar(dtHabitaciones.SelectedIndex);
+            opVerReservas.Click += (_, _) => this.VerReservasHabitacion((Habitacion) dtHabitaciones.SelectedItem);
+            opVerDisponibilidad.Click += (_, _) => this.VerDisponibilidad();
             opExit.Click += (_, _) => this.OnExit();
             btRes.Click += (_, _) => this.OnRes((Habitacion) dtHabitaciones.SelectedItem);
             
@@ -123,6 +129,23 @@ namespace gestionHotel.IU.gestionHabitaciones
                 
             }
             
+        }
+
+        async void VerReservasHabitacion(Habitacion habitacion)
+        {
+            if (habitacion == null)
+            {
+                new GeneralMessage("No se ha seleccionado una fila",false).Show();
+            }
+            else
+            {
+                await new ReservasHabitacionWindow(habitacion).ShowDialog(this);
+            }
+        }
+
+        async void VerDisponibilidad()
+        {
+            await new DisponibilidadWindow().ShowDialog(this);
         }
     }
 }

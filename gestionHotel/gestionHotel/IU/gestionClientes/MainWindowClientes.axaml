@@ -39,6 +39,9 @@
                     <Button Name="BtRes"
                             Margin="5"
                             Content="Reservar" />
+                    <Button Name="BtVerReservas"
+                            Margin="5"
+                            Content="Ver reservas del cliente" />
                     
                 </DockPanel>
                 
@@ -69,7 +72,6 @@
                                             <DataGridTextColumn Header="Telefono"  Binding="{Binding Telefono}" />
                                             <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
                                             <DataGridTextColumn Header="Direccion Postal" Binding="{Binding Direccion}" />
-
                                         </DataGrid.Columns>
                                     </DataGrid>
                                         

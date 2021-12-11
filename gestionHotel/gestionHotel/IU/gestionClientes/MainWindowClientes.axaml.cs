@@ -5,6 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using gestionHotel.core;
 using gestionHotel.core.IO;
+using gestionHotel.IU.busquedas;
 using gestionHotel.IU.gestionReservas;
 
 namespace gestionHotel.IU.gestionClientes
@@ -28,6 +29,7 @@ namespace gestionHotel.IU.gestionClientes
             var btDel = this.FindControl<Button>( "BtDel" );
             var btMod = this.FindControl<Button>( "BtMod" );
             var btRes = this.FindControl<Button>( "BtRes" );
+            var btVerReservas = this.FindControl<Button>( "BtVerReservas" );
             var dtClientes = this.FindControl<DataGrid>( "DtClientes" );
 
             opExit.Click += (_, _) => this.OnExit();
@@ -35,6 +37,7 @@ namespace gestionHotel.IU.gestionClientes
             btInsert.Click += (_, _) => this.OnInsert(); 
             btDel.Click += (_, _) => this.OnDel((Cliente) dtClientes.SelectedItem);
             btMod.Click += (_, _) => this.OnMod((Cliente) dtClientes.SelectedItem);
+            btVerReservas.Click += (_, _) => this.OnReservasClientes((Cliente) dtClientes.SelectedItem);
             btRes.Click += (_, _) => this.OnRes((Cliente) dtClientes.SelectedItem);
             
             this.Closed += (_, _) => this.OnSave();
@@ -152,6 +155,18 @@ namespace gestionHotel.IU.gestionClientes
                 
             }
             
+        }
+
+        async void OnReservasClientes(Cliente cliente)
+        {
+            if (cliente == null)
+            {
+                new GeneralMessage("Debes seleccionar una fila antes", false).Show();
+            }
+            else
+            {
+                await new ReservasClientesWindow(cliente).ShowDialog(this);
+            }
         }
         
        

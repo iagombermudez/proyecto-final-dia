@@ -3,15 +3,21 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using gestionHotel.core;
+using gestionHotel.core.coreClientes;
 using gestionHotel.core.coreReservas;
 
 namespace gestionHotel.IU.busquedas
 {
     public partial class ReservasClientesWindow : Window
     {
-        private Reserva[] reservasClientes;
+        private List<Reserva> reservasClientes;
+        private Cliente cliente;
 
         public ReservasClientesWindow()
+        {
+        }
+
+        public ReservasClientesWindow(Cliente cliente)
         {
             InitializeComponent();
 #if DEBUG
@@ -19,7 +25,7 @@ namespace gestionHotel.IU.busquedas
 
             
 #endif
-
+            this.cliente = cliente;
             var grid = this.FindControl<DataGrid>("Grid");
             var reservasYear = this.FindControl<DatePicker>("Year");
             
@@ -30,7 +36,16 @@ namespace gestionHotel.IU.busquedas
                     this.OnYearChanged(grid, reservasYear.SelectedDate.Value.Year);
                 }
             };
-            reservasClientes = RegistroGeneral.Reservas.RegistroReservasToArray;
+            Reserva[] reservas = RegistroGeneral.Reservas.RegistroReservasToArray;
+            reservasClientes = new List<Reserva>();
+            for (int i = 0; i < reservas.Length; i++)
+            {
+                if (reservas[i].Cliente.Dni == cliente.Dni)
+                {
+                    reservasClientes.Add(reservas[i]);
+                }
+            }
+            
             grid.Items = this.reservasClientes;
 
         }
@@ -42,8 +57,17 @@ namespace gestionHotel.IU.busquedas
 
         private void OnYearChanged( DataGrid grid, int year)
         {
-            reservasClientes = reservasClientes;
-            grid.Items = reservasClientes;
+            Reserva[] reservas = RegistroGeneral.Reservas.RegistroReservasToArray;
+            reservasClientes = new List<Reserva>();
+            for (int i = 0; i < reservas.Length; i++)
+            {
+                if (reservas[i].Cliente.Dni == cliente.Dni && reservas[i].FechaEntrada.Year == year)
+                {
+                    reservasClientes.Add(reservas[i]);
+                }
+            }
+            
+            grid.Items = this.reservasClientes;
         }
         
     }

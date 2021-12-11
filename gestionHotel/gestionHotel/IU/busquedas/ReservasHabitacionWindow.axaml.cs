@@ -3,15 +3,19 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using gestionHotel.core;
+using gestionHotel.core.coreHabitaciones;
 using gestionHotel.core.coreReservas;
 
 namespace gestionHotel.IU.busquedas
 {
     public partial class ReservasHabitacionWindow : Window
     {
-        private Reserva[] reservasHabitaciones;
+        private List<Reserva> reservasHabitaciones;
+        private Habitacion habitacion;
 
-        public ReservasHabitacionWindow()
+        
+        public ReservasHabitacionWindow(){}
+        public ReservasHabitacionWindow(Habitacion habitacion)
         {
             InitializeComponent();
 #if DEBUG
@@ -20,6 +24,7 @@ namespace gestionHotel.IU.busquedas
             
 #endif
 
+            this.habitacion = habitacion;
             var grid = this.FindControl<DataGrid>("Grid");
             var reservasYear = this.FindControl<DatePicker>("Year");
             
@@ -27,7 +32,15 @@ namespace gestionHotel.IU.busquedas
             {
                 if (reservasYear.SelectedDate != null) this.OnYearChanged(grid, reservasYear.SelectedDate.Value.Year);
             };
-            reservasHabitaciones = RegistroGeneral.Reservas.RegistroReservasToArray;
+            Reserva[] reservas = RegistroGeneral.Reservas.RegistroReservasToArray;
+            reservasHabitaciones = new List<Reserva>();
+            for (int i = 0; i < reservas.Length; i++)
+            {
+                if (reservas[i].Habitacion.Id == habitacion.Id)
+                {
+                    reservasHabitaciones.Add(reservas[i]);
+                }
+            }
             grid.Items = this.reservasHabitaciones;
 
         }
@@ -39,8 +52,17 @@ namespace gestionHotel.IU.busquedas
 
         private void OnYearChanged( DataGrid grid, int year)
         {
-            reservasHabitaciones = reservasHabitaciones;
-            grid.Items = reservasHabitaciones;
+            Reserva[] reservas = RegistroGeneral.Reservas.RegistroReservasToArray;
+            reservasHabitaciones = new List<Reserva>();
+            for (int i = 0; i < reservas.Length; i++)
+            {
+                if (reservas[i].Habitacion.Id == habitacion.Id 
+                    && reservas[i].FechaEntrada.Year == year)
+                {
+                    reservasHabitaciones.Add(reservas[i]);
+                }
+            }
+            grid.Items = this.reservasHabitaciones;
         }
         
     }
