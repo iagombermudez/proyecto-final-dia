@@ -42,6 +42,10 @@
         <DependentUpon>VisualizacionFactura.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="IU\busquedas\DisponibilidadWindow.axaml.cs">
+        <DependentUpon>DisponibilidadWindow2.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
     <ItemGroup>
       <UpToDateCheckInput Remove="gestionReservas\InsertarReserva.axaml" />

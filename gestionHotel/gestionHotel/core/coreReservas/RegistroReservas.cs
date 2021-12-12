@@ -29,7 +29,7 @@ namespace gestionHotel.core.coreReservas
             Reserva[] reservas = this.RegistroReservasToArray;
             DateTime today = DateTime.Today;
             IEnumerable<Reserva> reservasPendientes = reservas
-                .Where(reserva => reserva.FechaEntrada > today)
+                .Where(reserva => reserva.FechaEntrada > today && reserva.FechaEntrada <= (today.AddDays(5)))
                 .Select(reserva => reserva);
             return reservasPendientes.ToArray();
         }
