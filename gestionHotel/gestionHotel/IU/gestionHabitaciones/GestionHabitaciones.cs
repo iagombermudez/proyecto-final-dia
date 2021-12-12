@@ -37,6 +37,7 @@ namespace gestionHotel.IU.gestionHabitaciones
             var opEliminar = this.FindControl<Button>("btEliminar");
             var opVerReservas = this.FindControl<Button>("btVerReservas");
             var opVerDisponibilidad = this.FindControl<Button>("btVerDisponibilidad");
+            var opVerOcupadas = this.FindControl<Button>("btVerOcupadas");
             var btRes = this.FindControl<Button>( "BtRes" );
             var btCom = this.FindControl<Button>("btComodidades");
             
@@ -49,6 +50,7 @@ namespace gestionHotel.IU.gestionHabitaciones
             opModificar.Click += (_, _) => this.Modificar(dtHabitaciones.SelectedIndex);
             opVerReservas.Click += (_, _) => this.VerReservasHabitacion((Habitacion) dtHabitaciones.SelectedItem);
             opVerDisponibilidad.Click += (_, _) => this.VerDisponibilidad();
+            opVerOcupadas.Click += (_, _) => this.VerOcupadas();
             opExit.Click += (_, _) => this.OnExit();
             btRes.Click += (_, _) => this.OnRes((Habitacion) dtHabitaciones.SelectedItem);
             btCom.Click += (_, _) => this.OnGraphComodity();
@@ -148,6 +150,11 @@ namespace gestionHotel.IU.gestionHabitaciones
         async void VerDisponibilidad()
         {
             await new DisponibilidadWindow().ShowDialog(this);
+        }
+        
+        async void VerOcupadas()
+        {
+            await new OcupacionWindow().ShowDialog(this);
         }
         
         async void OnGraphComodity() { await new ComodidadesHabitacion().ShowDialog(this); }

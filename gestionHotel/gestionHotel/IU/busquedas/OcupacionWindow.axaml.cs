@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
@@ -22,9 +24,9 @@ namespace gestionHotel.IU.busquedas
             habitaciones = RegistroGeneral.Habitaciones.RegistroHabitacionToArray;
             
             var grid = this.FindControl<DataGrid>("Grid");
-            var piso = this.FindControl<ComboBox>("PisoCb");
+            var dtPicker = this.FindControl<DatePicker>("DtPicker");
             
-            piso.PropertyChanged += (_, _) => this.OnPisoPropertyChanged(piso.SelectedIndex, grid);
+            dtPicker.SelectedDateChanged += (_, _) => this.verHabitacionesOcupadas(dtPicker.SelectedDate.Value.DateTime, grid);
             
             grid.Items = this.habitaciones;
         }
@@ -34,12 +36,21 @@ namespace gestionHotel.IU.busquedas
             AvaloniaXamlLoader.Load(this);
         }
 
-        private void OnPisoPropertyChanged(int index, DataGrid grid)
+        private void verHabitacionesOcupadas(DateTime dia, DataGrid grid)
         {
-            habitaciones = habitaciones;
-            grid.Items = this.habitaciones;
+            Habitacion[] habitaciones = RegistroGeneral.Habitaciones.RegistroHabitacionToArray;
+            List<Habitacion> habitacionesOcupadas = new List<Habitacion>();
+            for (int i = 0; i < habitaciones.Length; i++)
+            {
+                if (habitaciones[i].EstaReservada(dia))
+                {
+                    habitacionesOcupadas.Add(habitaciones[i]);
+                }
+            }
+
+            grid.Items = habitacionesOcupadas;
         }
-        
-        
+
+
     }
 }

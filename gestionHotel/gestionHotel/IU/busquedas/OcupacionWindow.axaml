@@ -4,7 +4,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:core="clr-namespace:gestionHotel.core"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        Width="800" Height="450"
+        MinWidth="1300"
+        MinHeight="600"
+        Width="1300"
+        Height="600"
         x:Class="gestionHotel.IU.busquedas.OcupacionWindow"
         Title="Busquedas/Disponibilidad">
     <StackPanel
@@ -14,16 +17,7 @@
             Margin="5">
             <Label Content="Habitaciones Ocupadas"
                    Margin="5"></Label>
-            <Label Content="Seleccionar piso"
-                   Margin="5"></Label>
-            <ComboBox SelectedIndex="0"
-                      Name="PisoCb">
-                <ComboBoxItem>No</ComboBoxItem>
-                <ComboBoxItem>1</ComboBoxItem>
-                <ComboBoxItem>2</ComboBoxItem>
-                <ComboBoxItem>3</ComboBoxItem>
-                <ComboBoxItem>4</ComboBoxItem>
-            </ComboBox>
+            <DatePicker Name="DtPicker"></DatePicker>
             <Grid Margin="10"
                   Height="300">
                 <DataGrid Name="Grid"

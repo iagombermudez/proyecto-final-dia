@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using gestionHotel.core.coreReservas;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace gestionHotel.core.coreHabitaciones
 {
@@ -111,6 +115,28 @@ namespace gestionHotel.core.coreHabitaciones
             toret[4] = Cocina;
             toret[5] = Tv;
             return toret;
+        }
+
+        public bool EstaReservada(DateTime day)
+        {
+            List<Reserva> reservas = RegistroGeneral.Reservas.RegistroReservasToArray
+                .Where(x => x.Habitacion.Id == this.Id)
+                .Select(x => x).ToList();
+            
+            foreach (var reserva in reservas)
+            {
+                if (reserva.FechaEntrada <= day && reserva.FechaSalida >= day)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool EstaDisponible(DateTime day)
+        {
+            return !EstaReservada(day);
         }
     }
 }
