@@ -27,8 +27,7 @@ namespace gestionHotel.core.coreHabitaciones
         public void AddHabitacion(Habitacion nueva) =>
             base.Add(nueva);
             
-            
-            
+        
         public Habitacion BuscarHabitacion(int numHabitacion)
         {
             foreach (var h in this.ToArray())
@@ -36,10 +35,6 @@ namespace gestionHotel.core.coreHabitaciones
                 if (h.Id == numHabitacion)
                 {
                     return h;
-                }
-                else
-                {
-                    return null;
                 }
             }
 

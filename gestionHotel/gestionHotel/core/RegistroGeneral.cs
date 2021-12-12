@@ -17,7 +17,6 @@ namespace gestionHotel.core
         public static RegistroReservas Reservas
         {
             get => registroReservas;
-
             set => registroReservas = value;
         }
 
