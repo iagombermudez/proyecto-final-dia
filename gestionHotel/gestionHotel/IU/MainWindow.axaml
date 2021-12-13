@@ -9,7 +9,10 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch">
             
-        <Label Margin="5" Content="Bienvenido"></Label>
+        <Label 
+            FontSize="25"
+            FontWeight="Bold"
+            Margin="5" Content="Bienvenido"></Label>
         
         <Menu
             VerticalAlignment="Top">
@@ -35,7 +38,7 @@
 
                 <Border    Margin="5"
                            BorderThickness="1"
-                           CornerRadius="3"
+                           CornerRadius="1"
                            BorderBrush="Black">
                          <Grid>
                                   
@@ -71,9 +74,16 @@
                                   
                           </Grid>
                 </Border>
-                
-    
+            
         </DockPanel>
+        <DockPanel>
+            <Button Content="Actualizar"
+                    Name="btActualizar"></Button>
+            <Button Content="Reservar habitación"
+                    Name="btReservar"></Button>
+
+        </DockPanel>
+        
           
                         
                 

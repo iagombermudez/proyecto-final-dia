@@ -122,10 +122,17 @@ namespace gestionHotel.core.coreHabitaciones
             List<Reserva> reservas = RegistroGeneral.Reservas.RegistroReservasToArray
                 .Where(x => x.Habitacion.Id == this.Id)
                 .Select(x => x).ToList();
+
+            if (reservas.Count == 0)
+            {
+                return false;
+            }
             
             foreach (var reserva in reservas)
             {
-                if (reserva.FechaEntrada <= day && reserva.FechaSalida >= day)
+                DateTime fechaEntrada = reserva.FechaEntrada;
+                DateTime fechaSalida = reserva.FechaSalida;
+                if (fechaEntrada <= day && fechaSalida >= day)
                 {
                     return true;
                 }
@@ -138,7 +145,10 @@ namespace gestionHotel.core.coreHabitaciones
             List<Reserva> reservas = RegistroGeneral.Reservas.RegistroReservasToArray
                 .Where(x => x.Habitacion.Id == this.Id)
                 .Select(x => x).ToList();
-            
+            if (reservas.Count == 0)
+            {
+                return false;
+            }
             foreach (var reserva in reservas)
             {
                 if (reserva.FechaEntrada.Year == year || reserva.FechaSalida.Year == year)
@@ -146,7 +156,7 @@ namespace gestionHotel.core.coreHabitaciones
                     return true;
                 }
             }
-
+            
             return false;
         }
 

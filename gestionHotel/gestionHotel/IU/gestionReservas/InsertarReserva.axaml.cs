@@ -20,6 +20,10 @@ namespace gestionHotel.IU.gestionReservas
         private int position;
         public InsertarReserva(Cliente cliente)
         {
+            InitializeComponent();
+#if DEBUG
+            this.AttachDevTools();
+#endif
             this.position = -1;
             this._cliente = cliente;
             this.renderTemplate();
@@ -28,6 +32,10 @@ namespace gestionHotel.IU.gestionReservas
         
         public InsertarReserva(Habitacion habitacion)
         {
+            InitializeComponent();
+#if DEBUG
+            this.AttachDevTools();
+#endif
             this.position = -1;
             this._habitacion = habitacion;
             this.renderTemplate();

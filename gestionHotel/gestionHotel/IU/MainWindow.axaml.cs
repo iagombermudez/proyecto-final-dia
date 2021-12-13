@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
@@ -39,6 +41,14 @@ namespace gestionHotel.IU
 
             var opSalir = this.FindControl<MenuItem>("OpExit");
             opSalir.Click += (_, _) => this.OpSalir();
+
+            var grid = this.FindControl<DataGrid>("DtHabitacionesLibres");
+            
+            var opActualizar = this.FindControl<Button>("btActualizar");
+            opActualizar.Click += (_, _) => this.VerHabitacionesDisponibles(DateTime.Today, grid);
+
+            var opReservar = this.FindControl<Button>("btReservar");
+            opReservar.Click += (_, _) => this.RealizarReserva((Habitacion)grid.SelectedItem);
             
             this.Closed += (_, _) => this.OpSalir();
 
@@ -50,6 +60,8 @@ namespace gestionHotel.IU
             {
                 
             }
+            
+            this.VerHabitacionesDisponibles(DateTime.Today, grid);
 
             //CARGAR DATRAGRID CON RESULTADO DE BUSQUEDA DE HABITACIONES LIBRES
             var dtHabitacionesLibres = this.FindControl<DataGrid>("DtHabitacionesLibres");
@@ -94,6 +106,36 @@ namespace gestionHotel.IU
         {
             await new GrafReservasIndividuales().ShowDialog(this);
         }
+        
+        private void VerHabitacionesDisponibles(DateTime dia, DataGrid grid)
+        {
+            Habitacion[] habitaciones = RegistroGeneral.Habitaciones.RegistroHabitacionToArray;
+            List<Habitacion> habitacionesDisponibles = new List<Habitacion>();
+            for (int i = 0; i < habitaciones.Length; i++)
+            {
+                if (habitaciones[i].EstaDisponible(dia))
+                {
+                    habitacionesDisponibles.Add(habitaciones[i]);
+                }
+            }
+
+            grid.Items = habitacionesDisponibles;
+            
+        }
+
+        private async void RealizarReserva(Habitacion habitacion)
+        {
+            if (habitacion != null)
+            {
+                await new InsertarReserva(habitacion).ShowDialog(this);
+            }
+            else
+            {
+                var confirmar = new GeneralMessage("No se ha seleccionado una habitación", false);
+                await confirmar.ShowDialog( this );
+            }
+        }
+
 
     }
 }
