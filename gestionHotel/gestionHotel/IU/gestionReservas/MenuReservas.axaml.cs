@@ -53,8 +53,11 @@ namespace gestionHotel.IU.gestionReservas
             
             this.Closed += (_, _) => this.OnSave();
             
-            this.GraficaMes();
-            this.GraficaAnho();
+             if (!RegistroGeneral.Reservas.Length.Equals(0))
+             {
+                this.GraficaMes();
+                this.GraficaAnho(); 
+             }
         }
 
         private void onGenerateReceipt(int position)
