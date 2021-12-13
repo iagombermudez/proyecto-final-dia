@@ -34,7 +34,8 @@
                         <Button Margin="5" Content="Ver habitaciones vacías" Name="btVerDisponibilidad"></Button>
                         <Button Margin="5" Content="Ver habitaciones ocupadas" Name="btVerOcupadas"></Button>
                         <Button Margin="5" Content="Numero de Comodidades" Name="btComodidades"></Button>
-                                
+                        <Button Margin="5" Content="Ocupacion por habitacion" Name="BtGraf"></Button>     
+                        
                 </DockPanel>
                 
                         <DockPanel

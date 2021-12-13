@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection.PortableExecutable;
 using System.Threading;
 using Avalonia;
@@ -12,6 +13,7 @@ using gestionHotel.core.coreReservas;
 using gestionHotel.core.coreReservas.IO;
 using gestionHotel.core.IO;
 using gestionHotel.IU.busquedas;
+using ScottPlot.Avalonia;
 
 namespace gestionHotel.IU.gestionReservas
 {
@@ -51,6 +53,8 @@ namespace gestionHotel.IU.gestionReservas
             
             this.Closed += (_, _) => this.OnSave();
             
+            this.GraficaMes();
+            this.GraficaAnho();
         }
 
         private void onGenerateReceipt(int position)
@@ -159,6 +163,90 @@ namespace gestionHotel.IU.gestionReservas
 
         async void OnGraphClienteInd() { await new GrafReservasIndividuales().ShowDialog(this); }
         
+        
+        ////Reservas por meses
+        private void GraficaMes()
+        {
+            AvaPlot grafica = this.Find<AvaPlot>("GraficaMes");
+            List<int> meses = new List<int>(); //lista con el mes de cada reserva
+            
+            foreach (Reserva l in RegistroGeneral.Reservas)
+            {
+                meses.Add(l.FechaEntrada.Month);
+            }
+
+            //creamos pares <key (mes), count (nº de reservas en ese mes)>
+            var reservas = meses
+                .GroupBy(s => s)
+                .Select(reserva => new {Key = reserva.Key, Count = reserva.Count()});
+            
+            double[] values = new double[12];
+            double[] mes = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+            string[] mesString =
+            {
+                "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre",
+                "Noviembre", "Diciembre"
+            };
+
+            foreach (var a in reservas)
+            {
+                values[a.Key - 1] = a.Count;
+            }
+
+            grafica.Plot.Clear();
+            var pl1 = grafica.Plot.AddBar(values, mes);
+            pl1.ShowValuesAboveBars = true;
+            pl1.FillColor = System.Drawing.Color.Crimson;
+            grafica.Plot.XTicks(mes, mesString);
+            grafica.Plot.SetAxisLimits(yMin: 0);
+            grafica.Plot.SaveFig("bar_positions.png");
+        }
+        
+        ////Reservas por años
+        private void GraficaAnho()
+        {
+            AvaPlot grafica = this.Find<AvaPlot>("GraficaAnho");
+            List<int> anhos = new List<int>(); //lista con el año de cada reserva
+            
+            foreach (Reserva l in RegistroGeneral.Reservas)
+            {
+                anhos.Add(l.FechaEntrada.Year);
+            }
+            
+            //<key (año), count (nº de reservas en ese año)>
+            var reservas  = anhos
+                .GroupBy(s => s)
+                .Select(reserva => new { Key = reserva.Key, Count = reserva.Count() });
+            
+            //Desde el año de reserva más antiguo hasta el más reciente
+            int min = anhos.Min();
+            int max = anhos.Max();
+            int numAños = max - min;
+            
+            double[] values = new double[numAños+1];
+            double[] años = new double[numAños+1]; 
+            string[] añoString = new string[numAños+1]; 
+            
+            int minn = min;
+            for (int i = 0; i <= numAños; i++)
+            {
+                añoString[i] = minn.ToString();
+                años[i] = minn;
+                minn++;
+            }
+            
+            foreach (var a in reservas)
+            {
+                values[a.Key-min] = a.Count;
+            }
+            
+            grafica.Plot.Clear();
+            grafica.Plot.AddBar(values, años).ShowValuesAboveBars = true;
+            grafica.Plot.XTicks(años, añoString);
+            //grafica.Plot.YLabel("Número de reservas");
+            grafica.Plot.SetAxisLimits(yMin: 0);
+            grafica.Plot.SaveFig("bar_positions.png");
+        }
         
     }
 }

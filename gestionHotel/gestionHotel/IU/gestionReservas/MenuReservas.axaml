@@ -4,12 +4,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="gestionHotel.IU.gestionReservas.MenuReservas"
+        xmlns:ScottPlot="clr-namespace:ScottPlot.Avalonia;assembly=ScottPlot.Avalonia"
         Title="gestionReservas"
         MinWidth="1300"
         MinHeight="600"
-        Width="1300"
-        Height="600">
-        
+        Width="1200"
+        Height="800">
     
         <StackPanel Margin="7"
                     HorizontalAlignment="Stretch"
@@ -95,6 +95,19 @@
                                 <Button Name="BtRefresh">Refrescar</Button>
                         </DockPanel>-->
                         
+                <DockPanel DockPanel.Dock="Bottom">
+                        <DockPanel HorizontalAlignment="Stretch"
+                                   VerticalAlignment="Stretch">
+                                <TabControl Name="TabReservas" >
+                                        <TabItem Header="Reservas/mes" Name="TabMes"  Margin="400,40,0,0" FontSize="20">
+                                                <Label><ScottPlot:AvaPlot Name="GraficaMes" MinWidth="200" MinHeight="300" /></Label>
+                                        </TabItem>
+                                        <TabItem Header="Reservas/años" Name="TabAnho" Margin="20,40,0,0" FontSize="20">
+                                                <Label><ScottPlot:AvaPlot Name="GraficaAnho" MinWidth="200" MinHeight="300" /></Label>
+                                        </TabItem>  
+                                </TabControl>
+                        </DockPanel>  
+                </DockPanel>
                 
-                </StackPanel> 
+        </StackPanel> 
 </Window>

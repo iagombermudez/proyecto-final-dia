@@ -40,7 +40,7 @@ namespace gestionHotel.IU.gestionHabitaciones
             var opVerOcupadas = this.FindControl<Button>("btVerOcupadas");
             var btRes = this.FindControl<Button>( "BtRes" );
             var btCom = this.FindControl<Button>("btComodidades");
-            
+            var btGraf = this.FindControl<Button>("BtGraf");
                 
             //Para que el datagrid se cargue con los datos del txt.
             dtHabitaciones.Items = RegistroGeneral.Habitaciones;
@@ -54,6 +54,7 @@ namespace gestionHotel.IU.gestionHabitaciones
             opExit.Click += (_, _) => this.OnExit();
             btRes.Click += (_, _) => this.OnRes((Habitacion) dtHabitaciones.SelectedItem);
             btCom.Click += (_, _) => this.OnGraphComodity();
+            btGraf.Click += (_, _) => this.OnGraficaHabitacion((Habitacion) dtHabitaciones.SelectedItem);
             
             this.Closed += (_, _) => this.OnSave();
             
@@ -159,5 +160,16 @@ namespace gestionHotel.IU.gestionHabitaciones
         
         async void OnGraphComodity() { await new ComodidadesHabitacion().ShowDialog(this); }
         
+        async void OnGraficaHabitacion(Habitacion habitacion)
+        {
+            if (habitacion == null)
+            {
+                new GeneralMessage("No se ha seleccionado una habitacion",false).Show();
+            }
+            else
+            {
+                await new GraficoHabitacion(habitacion).ShowDialog(this);
+            }
+        }
     }
 }
