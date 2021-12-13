@@ -43,23 +43,97 @@ namespace gestionHotel.IU.gestionClientes {
         }
 
         public string Dni {
-            get => this.FindControl<TextBox>( "EdDni" ).Text.Trim();
+            get
+            {
+                string toret;
+                
+                try
+                {
+                    toret = this.FindControl<TextBox>( "EdDni" ).Text.Trim();
+                }
+                catch (Exception exc)
+                {
+                    toret = "";
+                }
+
+                return toret;
+            }
+            
         }
         
         public string Nombre {
-            get => this.FindControl<TextBox>( "EdNom" ).Text.Trim();
+            get
+            {
+                string toret;
+
+                try
+                {
+                    toret = this.FindControl<TextBox>("EdNom").Text.Trim();
+                }
+                catch (Exception exc)
+                {
+                    toret = "";
+                }
+
+                return toret;
+            }
         }
         
         public int Telefono {
-            get => Convert.ToInt32(this.FindControl<TextBox>( "EdTelf" ).Text.Trim());
+            
+            get
+            {
+                int toret;
+                
+                try
+                {
+                    toret = Convert.ToInt32(this.FindControl<TextBox>( "EdTelf" ).Text.Trim());
+                }
+                catch (Exception exc)
+                {
+                    toret = -1;
+                }
+
+                return toret;
+            }
         }
         
         public string Email {
-            get => this.FindControl<TextBox>( "EdEmail" ).Text.Trim();
+            
+            get
+            {
+                string toret;
+
+                try
+                {
+                    toret = this.FindControl<TextBox>( "EdEmail" ).Text.Trim();
+                }
+                catch (Exception exc)
+                {
+                    toret = "";
+                }
+
+                return toret;
+            }
         }
         
         public string Direccion {
-            get => this.FindControl<TextBox>( "EdDir" ).Text.Trim();
+            get
+            {
+                string toret;
+
+                try
+                {
+                    toret = this.FindControl<TextBox>( "EdDir" ).Text.Trim();
+
+                }
+                catch (Exception exc)
+                {
+                    toret = "";
+                }
+
+                return toret;
+            }
         }
 
         
