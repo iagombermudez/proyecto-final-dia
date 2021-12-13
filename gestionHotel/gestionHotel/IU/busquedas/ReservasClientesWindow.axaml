@@ -23,31 +23,37 @@
                 Name="Year"
                 DayVisible="False"
                 MonthVisible="False"></DatePicker>
-            <Grid Margin="10"
-                  Height="300">
-                <DataGrid Name="Grid"
-                          Margin="5"
-                          AutoGenerateColumns="False"
-                          IsReadOnly="True"
-                          SelectionMode="Single"
-                          AlternatingRowBackground="LightBlue"
-                          VerticalAlignment="Stretch"
-                          HorizontalAlignment="Stretch"
-                          MinHeight="250"
-                          Items="{Binding reservasClientes}">
-                    <DataGrid.Columns>
-                                <DataGridTextColumn Header="ID"  Binding="{Binding IdReserva}" />
-                                <DataGridTextColumn Header="Cliente"  Binding="{Binding Cliente.Dni}" />
-                                <DataGridTextColumn Header="Habitacion"  Binding="{Binding Habitacion.Id}" />
-                                <DataGridTextColumn Header="Importe por dia"  Binding="{Binding PrecioPorDia}" />
-                                <DataGridTextColumn Header="Fecha de entrada"  Binding="{Binding FechaEntrada}" />
-                                <DataGridTextColumn Header="Fecha de salida" Binding="{Binding FechaSalida}" />
-                                <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}" />
-                                <DataGridTextColumn Header="Garaje" Binding="{Binding UsaGaraje}" />
-                                <DataGridTextColumn Header="IVA aplicado" Binding="{Binding IVA}" />
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
+            <Border    
+                Margin="5"
+                BorderThickness="1"
+                CornerRadius="3"
+                BorderBrush="Black">
+                <Grid Margin="10"
+                      Height="300">
+                    <DataGrid Name="Grid"
+                              Margin="5"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              SelectionMode="Single"
+                              AlternatingRowBackground="LightBlue"
+                              VerticalAlignment="Stretch"
+                              HorizontalAlignment="Stretch"
+                              MinHeight="250"
+                              Items="{Binding reservasClientes}">
+                        <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID"  Binding="{Binding IdReserva}" />
+                                    <DataGridTextColumn Header="Cliente"  Binding="{Binding Cliente.Dni}" />
+                                    <DataGridTextColumn Header="Habitacion"  Binding="{Binding Habitacion.Id}" />
+                                    <DataGridTextColumn Header="Importe por dia"  Binding="{Binding PrecioPorDia}" />
+                                    <DataGridTextColumn Header="Fecha de entrada"  Binding="{Binding FechaEntrada}" />
+                                    <DataGridTextColumn Header="Fecha de salida" Binding="{Binding FechaSalida}" />
+                                    <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}" />
+                                    <DataGridTextColumn Header="Garaje" Binding="{Binding UsaGaraje}" />
+                                    <DataGridTextColumn Header="IVA aplicado" Binding="{Binding IVA}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Border>
         </StackPanel>
         
 </Window>

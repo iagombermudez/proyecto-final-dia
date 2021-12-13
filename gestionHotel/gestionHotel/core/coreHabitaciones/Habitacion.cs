@@ -133,10 +133,31 @@ namespace gestionHotel.core.coreHabitaciones
 
             return false;
         }
+        public bool EstaReservada(int year)
+        {
+            List<Reserva> reservas = RegistroGeneral.Reservas.RegistroReservasToArray
+                .Where(x => x.Habitacion.Id == this.Id)
+                .Select(x => x).ToList();
+            
+            foreach (var reserva in reservas)
+            {
+                if (reserva.FechaEntrada.Year == year || reserva.FechaSalida.Year == year)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         public bool EstaDisponible(DateTime day)
         {
             return !EstaReservada(day);
+        }
+        
+        public bool EstaDisponible(int year)
+        {
+            return !EstaReservada(year);
         }
     }
 }

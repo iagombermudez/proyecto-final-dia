@@ -17,7 +17,14 @@
             Margin="5">
             <Label Content="Habitaciones Ocupadas"
                    Margin="5"></Label>
-            <DatePicker Name="DtPicker"></DatePicker>
+            <Label Content="Seleccionar año"
+                   Margin="5"></Label>
+        <DatePicker Name="DtPicker"></DatePicker>
+        <CheckBox Name="yearFilter">Filtrar solo por año</CheckBox>
+        <Border Margin="5"
+                BorderThickness="1"
+                CornerRadius="3"
+                BorderBrush="Black">
             <Grid Margin="10"
                   Height="300">
                 <DataGrid Name="Grid"
@@ -29,6 +36,7 @@
                           Items="{Binding habitaciones}">                           
                 </DataGrid>
             </Grid>
+        </Border>
         </StackPanel>
         
 </Window>
